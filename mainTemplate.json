@@ -4,8 +4,9 @@
   "parameters": {
     "VirtualMachineSize": {
       "type": "string",
-      "defaultValue": "Standard_D2",
+      "defaultValue": "Standard_A2",
       "allowedValues": [
+        "Standard_A2",
         "Standard_A3",
         "Standard_A4",
         "Standard_A8",
@@ -259,7 +260,8 @@
 
     "storageAccountSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','storageAccount-',parameters('storageAccountNewOrExisting'),'.json')]",
     "publicIPSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','publicip-',parameters('publicIPNewOrExistingOrNone'),'.json')]",
-    "virtualNetworkSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','vnet-',parameters('vnetNewOrExisting'),'.json')]"
+    "virtualNetworkSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','vnet-',parameters('vnetNewOrExisting'),'.json')]",
+    "vMAndNICSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','vm-',parameters('VirtualMachineSize'),'.json')]"
   },
   "resources": [
     {
