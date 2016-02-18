@@ -5,21 +5,6 @@
     "VirtualMachineSize": {
       "type": "string",
       "defaultValue": "Standard_A2",
-      "allowedValues": [
-        "Standard_A2",
-        "Standard_A3",
-        "Standard_A4",
-        "Standard_A8",
-        "Standard_A9",
-        "Standard_D2",
-        "Standard_D3",
-        "Standard_D4",
-        "Standard_D13",
-        "Standard_D14",
-        "Standard_DS4",
-        "Standard_DS13",
-        "Standard_DS14"
-      ],
       "metadata": {
         "description": "Virtual Machine size selection"
       }
@@ -213,12 +198,8 @@
     }
   },
   "variables": {
-    "compute_AvailabilitySet_FG_Name": "fgAvailabilitySet",
-    "compute_AvailabilitySet_FG_Id": "[resourceId('Microsoft.Compute/availabilitySets', variables('compute_AvailabilitySet_FG_Name'))]",
-
     "storageAccountType": "[parameters('StorageAccountType')]",
     "vmStorageAccountContainerName": "vhds",
-    "vmSize": "[parameters('VirtualMachineSize')]",
 
     "VNetName": "[parameters('virtualnetName')]",
     "Subnet1Name": "[parameters('Subnet1Name')]",
@@ -242,19 +223,13 @@
     "routeTable2BName": "[concat(variables('vm2Name'),'ProtectedSubnetRoutes')]",
     "FGBProtectedAddress": "[parameters('fortiGateBIP2')]",
     "FGBPubFacingAddress": "[parameters('fortiGateBIP1')]",
-    "scaleNumber": 1,
     "apiVer": "2015-06-15",
-    "compute_VM_fg1_Name": "[variables('vmName')]",
-    "compute_VM_fg2_Name": "[variables('vm2Name')]",
 
     "network_NIC_fg11_Name": "[concat(variables('vmName'),'Nic0')]",
     "network_NIC_fg11_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg11_Name'))]",
-    "network_NIC_fg12_Name": "[concat(variables('vmName'),'Nic1')]",
-    "network_NIC_fg12_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg12_Name'))]",
     "network_NIC_fg21_Name": "[concat(variables('vm2Name'),'Nic0')]",
     "network_NIC_fg21_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg21_Name'))]",
-    "network_NIC_fg22_Name": "[concat(variables('vm2Name'),'Nic1')]",
-    "network_NIC_fg22_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg22_Name'))]",
+
 
     "storage_Acct_1_Id": "[resourceId('Microsoft.Storage/storageAccounts',parameters('StorageAccountName'))]",
 
@@ -492,194 +467,64 @@
       }
     },
     {
-      "apiVersion": "[variables('apiVer')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "name": "[variables('network_NIC_fg12_Name')]",
-      "location": "[parameters('location')]",
+      "apiVersion": "2015-01-01",
+      "type": "Microsoft.Resources/deployments",
+      "name": "SettingUpSecondaryNICsandVMs",
       "dependsOn": [
-        "[concat('Microsoft.Resources/deployments/', 'SettingUpVirtualNetwork')]"
+        "[concat('Microsoft.Resources/deployments/', 'SettingUpPublicIPandFollowing')]"
       ],
       "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[variables('FGProtectedAddress')]",
-              "subnet": {
-                "id": "[reference('Microsoft.Resources/deployments/SettingUpVirtualNetwork', '2015-01-01').outputs.subnet2ID.value]"
-              }
-            }
-          }
-        ],
-        "enableIPForwarding": true
-      }
-    },
-    {
-      "apiVersion": "[variables('apiVer')]",
-      "type": "Microsoft.Network/networkInterfaces",
-      "name": "[variables('network_NIC_fg22_Name')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[concat('Microsoft.Resources/deployments/', 'SettingUpVirtualNetwork')]"
-      ],
-      "properties": {
-        "ipConfigurations": [
-          {
-            "name": "ipconfig1",
-            "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[variables('FGBProtectedAddress')]",
-              "subnet": {
-                "id": "[reference('Microsoft.Resources/deployments/SettingUpVirtualNetwork', '2015-01-01').outputs.subnet2ID.value]"
-              }
-            }
-          }
-        ],
-        "enableIPForwarding": true
-      }
-    },
-    {
-      "type": "Microsoft.Compute/virtualMachines",
-      "name": "[variables('compute_VM_fg1_Name')]",
-      "apiVersion": "[variables('apiVer')]",
-      "location": "[parameters('location')]",
-      "plan": {
-        "name": "fortinet_fg-vm",
-        "publisher": "fortinet",
-        "product": "fortinet_fortigate-vm_v5"
-      },
-      "copy": {
-        "name": "vmLoop",
-        "count": "[variables('scaleNumber')]"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Resources/deployments/', 'SettingUpPublicIPandFollowing')]",
-        "[concat('Microsoft.Network/networkInterfaces/',variables('network_NIC_fg12_Name'))]",
-        "[concat('Microsoft.Resources/deployments/', 'SettingUpStorageAccount')]"
-      ],
-      "properties": {
-        "hardwareProfile": {
-          "vmSize": "[variables('vmSize')]"
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('vMAndNICSetupURL')]",
+          "contentVersion": "1.0.0.0"
         },
-        "availabilitySet": {
-          "id": "[variables('compute_AvailabilitySet_FG_Id')]"
-        },
-        "osProfile": {
-          "computerName": "[variables('compute_VM_fg1_Name')]",
-          "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
-        },
-        "diagnosticsProfile": {
-          "bootDiagnostics": {
-            "enabled": true,
-            "storageUri": "[concat('http://', parameters('StorageAccountName'), '.blob.core.windows.net')]"
-          }
-        },
-        "storageProfile": {
-          "imageReference": {
-            "publisher": "fortinet",
-            "offer": "fortinet_fortigate-vm_v5",
-            "sku": "fortinet_fg-vm",
-            "version": "latest"
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
           },
-          "osDisk": {
-            "name": "[concat(variables('compute_VM_fg1_Name'),'-osDisk')]",
-            "caching": "ReadWrite",
-            "createOption": "FromImage",
-            "vhd": {
-              "uri": "[concat('http://',parameters('StorageAccountName'),'.blob.core.windows.net/vhds/', variables('compute_VM_fg1_Name'), '-osdisk', '.vhd')]"
-            }
-          }
-        },
-        "networkProfile": {
-          "networkInterfaces": [
-            {
-              "properties": {
-                "primary": true
-              },
-              "id": "[variables('network_NIC_fg11_Id')]"
-            },
-            {
-              "properties": {
-                "primary": false
-              },
-              "id": "[variables('network_NIC_fg12_Id')]"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "type": "Microsoft.Compute/virtualMachines",
-      "name": "[variables('compute_VM_fg2_Name')]",
-      "apiVersion": "[variables('apiVer')]",
-      "location": "[parameters('location')]",
-      "plan": {
-        "name": "fortinet_fg-vm",
-        "publisher": "fortinet",
-        "product": "fortinet_fortigate-vm_v5"
-      },
-      "copy": {
-        "name": "vmLoop",
-        "count": "[variables('scaleNumber')]"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Resources/deployments/', 'SettingUpPublicIPandFollowing')]",
-        "[concat('Microsoft.Network/networkInterfaces/',variables('network_NIC_fg22_Name'))]",
-        "[concat('Microsoft.Resources/deployments/', 'SettingUpStorageAccount')]"
-      ],
-      "properties": {
-        "hardwareProfile": {
-          "vmSize": "[variables('vmSize')]"
-        },
-        "availabilitySet": {
-          "id": "[variables('compute_AvailabilitySet_FG_Id')]"
-        },
-        "osProfile": {
-          "computerName": "[variables('compute_VM_fg2_Name')]",
-          "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
-        },
-        "diagnosticsProfile": {
-          "bootDiagnostics": {
-            "enabled": true,
-            "storageUri": "[concat('http://', parameters('StorageAccountName'), '.blob.core.windows.net')]"
-          }
-        },
-        "storageProfile": {
-          "imageReference": {
-            "publisher": "fortinet",
-            "offer": "fortinet_fortigate-vm_v5",
-            "sku": "fortinet_fg-vm",
-            "version": "latest"
+          "vmNamePrefix": {
+            "value": "[parameters('vmNamePrefix')]"
           },
-          "osDisk": {
-            "name": "[concat(variables('compute_VM_fg2_Name'),'-osDisk')]",
-            "caching": "ReadWrite",
-            "createOption": "FromImage",
-            "vhd": {
-              "uri": "[concat('http://',parameters('StorageAccountName'),'.blob.core.windows.net/vhds/', variables('compute_VM_fg2_Name'), '-osdisk', '.vhd')]"
-            }
+          "vmName": {
+            "value": "[variables('vmName')]"
+          },
+          "vm2Name": {
+            "value": "[variables('vm2Name')]"
+          },
+          "virtualnetName": {
+            "value": "[parameters('virtualnetName')]"
+          },
+          "subnet2Ref": {
+            "value": "[reference('Microsoft.Resources/deployments/SettingUpVirtualNetwork', '2015-01-01').outputs.subnet2ID.value]"
+          },
+          "FGProtectedAddress": {
+            "value": "[variables('FGProtectedAddress')]"
+          },
+          "FGBProtectedAddress": {
+            "value": "[variables('FGBProtectedAddress')]"
+          },
+          "adminUsername": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "adminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "StorageAccountName": {
+            "value": "[parameters('StorageAccountName')]"
+          },
+          "VirtualMachineSize": {
+            "value": "[parameters('VirtualMachineSize')]"
+          },
+          "network_NIC_fg11_Id": {
+            "value": "[variables('network_NIC_fg11_Id')]"
+          },
+          "network_NIC_fg21_Id": {
+            "value": "[variables('network_NIC_fg21_Id')]"
           }
-        },
-        "networkProfile": {
-          "networkInterfaces": [
-            {
-              "properties": {
-                "primary": true
-              },
-              "id": "[variables('network_NIC_fg21_Id')]"
-            },
-            {
-              "properties": {
-                "primary": false
-              },
-              "id": "[variables('network_NIC_fg22_Id')]"
-            }
-          ]
         }
       }
     }
   ]
-  }
+}
+
