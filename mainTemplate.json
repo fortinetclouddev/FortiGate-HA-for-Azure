@@ -240,12 +240,6 @@
   },
   "resources": [
     {
-      "type": "Microsoft.Compute/availabilitySets",
-      "name": "[variables('compute_AvailabilitySet_FG_Name')]",
-      "apiVersion": "[variables('apiVer')]",
-      "location": "[parameters('location')]"
-    },
-    {
       "name": "SettingUpStorageAccount",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
