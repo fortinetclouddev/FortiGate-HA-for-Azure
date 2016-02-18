@@ -7,9 +7,6 @@
       "metadata": {
         "description": "Location"
       },
-      "vmNamePrefix": {
-        "type": "string"
-      },
       "vmName": {
         "type": "string"
       },

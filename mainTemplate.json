@@ -477,9 +477,6 @@
           "location": {
             "value": "[parameters('location')]"
           },
-          "vmNamePrefix": {
-            "value": "[parameters('vmNamePrefix')]"
-          },
           "vmName": {
             "value": "[variables('vmName')]"
           },
