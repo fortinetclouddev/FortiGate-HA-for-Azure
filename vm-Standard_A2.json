@@ -6,43 +6,43 @@
       "type": "string",
       "metadata": {
         "description": "Location"
-      },
-      "vmName": {
-        "type": "string"
-      },
-      "vm2Name": {
-        "type": "string"
-      },
-      "virtualnetName": {
-        "type": "string"
-      },
-      "subnet2Ref": {
-        "type": "string"
-      },
-      "FGProtectedAddress": {
-        "type": "string"
-      },
-      "FGBProtectedAddress": {
-        "type": "string"
-      },
-      "adminUsername": {
-        "type": "string"
-      },
-      "adminPassword": {
-        "type": "string"
-      },
-      "StorageAccountName": {
-        "type": "string"
-      },
-      "VirtualMachineSize": {
-        "type": "string"
-      },
-      "network_NIC_fg11_Id": {
-        "type": "string"
-      },
-      "network_NIC_fg21_Id": {
-        "type": "string"
       }
+    },
+    "vmName": {
+      "type": "string"
+    },
+    "vm2Name": {
+      "type": "string"
+    },
+    "virtualnetName": {
+      "type": "string"
+    },
+    "subnet2Ref": {
+      "type": "string"
+    },
+    "FGProtectedAddress": {
+      "type": "string"
+    },
+    "FGBProtectedAddress": {
+      "type": "string"
+    },
+    "adminUsername": {
+      "type": "string"
+    },
+    "adminPassword": {
+      "type": "string"
+    },
+    "StorageAccountName": {
+      "type": "string"
+    },
+    "VirtualMachineSize": {
+      "type": "string"
+    },
+    "network_NIC_fg11_Id": {
+      "type": "string"
+    },
+    "network_NIC_fg21_Id": {
+      "type": "string"
     }
   },
 
