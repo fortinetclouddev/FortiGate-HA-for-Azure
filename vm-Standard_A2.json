@@ -182,6 +182,7 @@
         }
       }
     },
+
     {
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vm2Name')]",
