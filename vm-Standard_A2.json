@@ -116,8 +116,8 @@
         "product": "fortinet_fortigate-vm_v5"
       },
       "dependsOn": [
-        "[variables(network_NIC_fg12_Id)]",
-        "[variables(compute_AvailabilitySet_FG_Id)]"
+        "[variables('network_NIC_fg12_Id')]",
+        "[variables('compute_AvailabilitySet_FG_Id')]"
       ],
       "properties": {
         "hardwareProfile": {
@@ -193,8 +193,8 @@
         "product": "fortinet_fortigate-vm_v5"
       },
       "dependsOn": [
-        "[variables(network_NIC_fg12_Id)]",
-        "[variables(compute_AvailabilitySet_FG_Id)]"
+        "[variables('network_NIC_fg12_Id')]",
+        "[variables('compute_AvailabilitySet_FG_Id')]"
       ],
       "properties": {
         "hardwareProfile": {
