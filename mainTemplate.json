@@ -77,6 +77,7 @@
     },
     "uniqueDnsPrefixForPublicIP": {
       "type": "string",
+      "defaultValue": "",
       "metadata": {
         "description": "Unique DNS Prefix for the Public IP used to access the Virtual Machine."
       }
@@ -476,6 +477,9 @@
         "parameters": {
           "location": {
             "value": "[parameters('location')]"
+          },
+          "vmNamePrefix": {
+            "value": "[parameters('vmNamePrefix')]"
           },
           "vmName": {
             "value": "[variables('vmName')]"

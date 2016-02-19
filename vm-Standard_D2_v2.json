@@ -8,6 +8,9 @@
         "description": "Location"
       }
     },
+    "vmNamePrefix": {
+      "type": "string"
+    },
     "vmName": {
       "type": "string"
     },
@@ -52,7 +55,7 @@
     "network_NIC_fg12_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg12_Name'))]",
     "network_NIC_fg22_Name": "[concat(parameters('vm2Name'),'Nic1')]",
     "network_NIC_fg22_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg22_Name'))]",
-    "compute_AvailabilitySet_FG_Name": "[concat(parameters('vmName'),'AvailabilitySet')]",
+    "compute_AvailabilitySet_FG_Name": "[concat(parameters('vmNamePrefix'),'AvailabilitySet')]",
     "compute_AvailabilitySet_FG_Id": "[resourceId('Microsoft.Compute/availabilitySets', variables('compute_AvailabilitySet_FG_Name'))]"
   },
 
