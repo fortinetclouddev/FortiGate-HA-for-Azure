@@ -116,7 +116,7 @@
     "network_LB_Public_NatRule_FGAdminInit_fg2_Id": "[concat(variables('network_LB_Public_Id'),'/inboundNatRules/',variables('network_LB_Public_NatRule_FGAdminInit_fg2_Name'))]",
     "network_LB_Public_NatRule_FGAdminPerm_fg2_Name": "[concat(parameters('VM2Name'),'FGAdminPerm')]",
     "network_LB_Public_NatRule_FGAdminPerm_fg2_Id": "[concat(variables('network_LB_Public_Id'),'/inboundNatRules/',variables('network_LB_Public_NatRule_FGAdminPerm_fg2_Name'))]",
-    "network_LB_Public_NatRule_FMtoFG_fg2_Name": "[concat(parameters('VMN2ame'),'FGAdminByFM')]",
+    "network_LB_Public_NatRule_FMtoFG_fg2_Name": "[concat(parameters('VM2Name'),'FGAdminByFM')]",
     "network_LB_Public_NatRule_FMtoFG_fg2_Id": "[concat(variables('network_LB_Public_Id'),'/inboundNatRules/',variables('network_LB_Public_NatRule_FMtoFG_fg2_Name'))]",
     "network_LB_Public_NatRule_SSH_fg2_Name": "[concat(parameters('VM2Name'),'SSH')]",
     "network_LB_Public_NatRule_SSH_fg2_Id": "[concat(variables('network_LB_Public_Id'),'/inboundNatRules/',variables('network_LB_Public_NatRule_SSH_fg2_Name'))]",
