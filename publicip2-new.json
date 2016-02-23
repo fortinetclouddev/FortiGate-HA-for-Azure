@@ -35,15 +35,7 @@
   },
   "variables": {
     "publicIP2ID": "[resourceID('Microsoft.Network/publicIPAddresses',parameters('publicIPAddress2Name'))]",
-    "apiVer": "2015-06-15",
-    "vm1PublicIPName": "[concat(parameters('VMName'),'-publicIP')]",
-    "vm2PublicIPName": "[concat(parameters('VM2Name'),'-publicIP')]",
-    "vm1PublicIPID": "[resourceID('Microsoft.Network/publicIPAddresses',variables('vm1PublicIPName'))]",
-    "vm2PublicIPID": "[resourceID('Microsoft.Network/publicIPAddresses',variables('vm2PublicIPName'))]",
-    "vm1PublicDNS": "[concat(parameters('dnsName'),'a')]",
-    "vm2PublicDNS": "[concat(parameters('dnsName'),'b')]",
-    "publicIPAddress2Name": "[concat(parameters('publicIPAddressName'),'2')]",
-    "dns2Name": "[concat(parameters('dnsName'),'2')]"
+    "apiVer": "2015-06-15"
   },
   "resources": [
     {
