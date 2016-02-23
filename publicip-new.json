@@ -249,7 +249,7 @@
             }
           },
           {
-            "name": "[variables('network_LB_Public_NatRule_SSH_fg1_Name')]",
+            "name": "[variables('network_LB_Public_NatRule_FMtoFG_fg1_Name')]",
             "properties": {
               "frontendIPConfiguration": {
                 "id": "[variables('network_LB_Public_FEId')]"
@@ -333,7 +333,7 @@
             }
           },
           {
-            "name": "[variables('network_LB_Public_NatRule_SSH_fg2_Name')]",
+            "name": "[variables('network_LB_Public_NatRule_FMtoFG_fg2_Name')]",
             "properties": {
               "frontendIPConfiguration": {
                 "id": "[variables('network_LB_Public_FE2Id')]"
