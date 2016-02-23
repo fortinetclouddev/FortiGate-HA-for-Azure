@@ -53,7 +53,7 @@
   ],
     "outputs": {
         "public2IPID": {
-            "value": "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),parameters('publicIPAddressName'))]",
+            "value": "[variables('publicIP2ID')]",
             "type": "string"
         }
     }
