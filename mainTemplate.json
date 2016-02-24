@@ -537,7 +537,8 @@
       "type": "Microsoft.Resources/deployments",
       "name": "SettingUpSecondaryNICsandVMs",
       "dependsOn": [
-        "[concat('Microsoft.Resources/deployments/', 'SettingUpPublicIPandFollowing')]"
+        "[concat('Microsoft.Resources/deployments/', 'SettingUpPublicIPandFollowing')]",
+        "[concat('Microsoft.Resources/deployments/', 'SettingUpStorageAccount')]"
       ],
       "properties": {
         "mode": "Incremental",
