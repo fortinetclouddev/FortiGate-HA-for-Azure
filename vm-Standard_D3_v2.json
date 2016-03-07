@@ -122,6 +122,17 @@
       "name": "[variables('network_NIC_fg13_Name')]",
       "location": "[parameters('location')]",
       "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[parameters('subnet2Ref')]"
+              }
+            }
+          }
+        ],
         "enableIPForwarding": true
       }
     },
