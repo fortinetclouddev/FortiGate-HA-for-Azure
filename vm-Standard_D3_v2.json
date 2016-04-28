@@ -122,7 +122,8 @@
       "name": "[variables('network_NIC_fg13_Name')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[variables('network_NIC_fg12_Id')]"
+        "[variables('network_NIC_fg12_Id')]",
+        "[variables('network_NIC_fg22_Id')]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -145,7 +146,9 @@
       "name": "[variables('network_NIC_fg23_Name')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[variables('network_NIC_fg22_Id')]"
+        "[variables('network_NIC_fg12_Id')]",
+        "[variables('network_NIC_fg22_Id')]",
+        "[variables('network_NIC_fg13_Id')]"
       ],
       "properties": {
         "ipConfigurations": [
