@@ -121,6 +121,9 @@
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg13_Name')]",
       "location": "[parameters('location')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg12_Id')]"
+      ],
       "properties": {
         "ipConfigurations": [
           {
@@ -141,6 +144,9 @@
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg23_Name')]",
       "location": "[parameters('location')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg22_Id')]"
+      ],
       "properties": {
         "ipConfigurations": [
           {
@@ -168,6 +174,7 @@
       },
       "dependsOn": [
         "[variables('network_NIC_fg12_Id')]",
+        "[variables('network_NIC_fg13_Id')]",
         "[variables('compute_AvailabilitySet_FG_Id')]"
       ],
       "properties": {
@@ -251,7 +258,8 @@
         "product": "fortinet_fortigate-vm_v5"
       },
       "dependsOn": [
-        "[variables('network_NIC_fg12_Id')]",
+        "[variables('network_NIC_fg22_Id')]",
+        "[variables('network_NIC_fg23_Id')]",
         "[variables('compute_AvailabilitySet_FG_Id')]"
       ],
       "properties": {
