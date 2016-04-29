@@ -79,6 +79,18 @@
       "metadata": {
         "description": "FGB NIC0 interface name"
       }
+    },
+    "publicIP2ID": {
+      "type": "string",
+      "metadata": {
+        "description": "Bogus IP2ID"
+      }
+    },
+    "VM2Name": {
+      "type": "string",
+      "metadata": {
+        "description": "VM 2 Name"
+      }
     }
   },
   "variables": {
