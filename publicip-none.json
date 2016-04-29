@@ -56,6 +56,12 @@
         "description": "Outside address of FortiGate"
       }
     },
+    "FGBPubFacingAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "Outside address of FortiGate"
+      }
+    },
     "subnet1Ref": {
       "type": "string",
       "metadata": {
@@ -65,7 +71,13 @@
     "network_NIC_fg11_Name": {
       "type": "string",
       "metadata": {
-		  "description": "NIC0 interface name"
+        "description": "FGA NIC0 interface name"
+      }
+    },
+    "network_NIC_fg21_Name": {
+      "type": "string",
+      "metadata": {
+        "description": "FGB NIC0 interface name"
       }
     }
   },
@@ -94,8 +106,28 @@
         "enableIPForwarding": true
 
       }
-    }
-  ],
-      "outputs": {
+    },
+    {
+      "apiVersion": "[variables('apiVer')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "[parameters('network_NIC_fg21_Name')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('FGBPubFacingAddress')]",
+              "subnet": {
+                "id": "[parameters('subnet1Ref')]"
+              }
+            }
+          }
+        ],
+        "enableIPForwarding": true
+
       }
     }
+  ]
+}
