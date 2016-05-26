@@ -99,6 +99,9 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg22_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg12_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -120,6 +123,10 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg13_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg12_Id')]",
+        "[variables('network_NIC_fg22_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -140,6 +147,11 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg23_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg12_Id')]",
+        "[variables('network_NIC_fg22_Id')]",
+        "[variables('network_NIC_fg13_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
