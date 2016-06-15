@@ -109,55 +109,6 @@
         "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
       }
     },
-     "uniqueDnsPrefixForPublicIP6": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
-      }
-    },
-     "uniqueDnsPrefixForPublicIP7": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
-      }
-    },
-     "uniqueDnsPrefixForPublicIP8": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
-      }
-    },
-     "uniqueDnsPrefixForPublicIP9": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
-      }
-    },
-     "uniqueDnsPrefixForPublicIP10": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
-      }
-    },
-     "uniqueDnsPrefixForPublicIP11": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
-      }
-    },
-     "uniqueDnsPrefixForPublicIP12": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
-      }
-    },
     "publicIPAddressResourceGroup": {
       "type": "string",
       "defaultValue": "",
@@ -194,55 +145,6 @@
       }
     },
     "publicIPAddress5Name": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Name of Public IP address element."
-      }
-    },
-    "publicIPAddress6Name": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Name of Public IP address element."
-      }
-    },
-    "publicIPAddress7Name": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Name of Public IP address element."
-      }
-    },
-    "publicIPAddress8Name": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Name of Public IP address element."
-      }
-    },
-    "publicIPAddress9Name": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Name of Public IP address element."
-      }
-    },
-    "publicIPAddress10Name": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Name of Public IP address element."
-      }
-    },
-    "publicIPAddress11Name": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Name of Public IP address element."
-      }
-    },
-    "publicIPAddress12Name": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
@@ -606,48 +508,6 @@
           },
           "dns5Name": {
             "value": "[parameters('uniqueDnsPrefixForPublicIP5')]"
-          },
-          "publicIPAddress6Name": {
-            "value": "[parameters('publicIPAddress6Name')]"
-          },
-          "dns6Name": {
-            "value": "[parameters('uniqueDnsPrefixForPublicIP6')]"
-          },
-          "publicIPAddress7Name": {
-            "value": "[parameters('publicIPAddress7Name')]"
-          },
-          "dns7Name": {
-            "value": "[parameters('uniqueDnsPrefixForPublicIP7')]"
-          },
-          "publicIPAddress8Name": {
-            "value": "[parameters('publicIPAddress8Name')]"
-          },
-          "dns8Name": {
-            "value": "[parameters('uniqueDnsPrefixForPublicIP8')]"
-          },
-          "publicIPAddress9Name": {
-            "value": "[parameters('publicIPAddress9Name')]"
-          },
-          "dns9Name": {
-            "value": "[parameters('uniqueDnsPrefixForPublicIP9')]"
-          },
-          "publicIPAddress10Name": {
-            "value": "[parameters('publicIPAddress10Name')]"
-          },
-          "dns10Name": {
-            "value": "[parameters('uniqueDnsPrefixForPublicIP10')]"
-          },
-          "publicIPAddress11Name": {
-            "value": "[parameters('publicIPAddress11Name')]"
-          },
-          "dns11Name": {
-            "value": "[parameters('uniqueDnsPrefixForPublicIP11')]"
-          },
-          "publicIPAddress12Name": {
-            "value": "[parameters('publicIPAddress12Name')]"
-          },
-          "dns12Name": {
-            "value": "[parameters('uniqueDnsPrefixForPublicIP12')]"
           },
           "publicIPAddressResourceGroup": {
             "value": "[parameters('publicIPAddressResourceGroup')]"
