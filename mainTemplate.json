@@ -33,24 +33,11 @@
         "description": "Identifies whether to use new or existing Storage Account"
       }
     },
-    "publicIPNewOrExistingOrNone": {
+    "publicIPsNewOrNone": {
       "type": "string",
       "defaultValue": "new",
       "allowedValues": [
         "new",
-        "existing",
-        "none"
-      ],
-      "metadata": {
-        "description": "Whether to use a public IP and if so whether it is new"
-      }
-    },
-    "publicIP2NewOrExistingOrNone": {
-      "type": "string",
-      "defaultValue": "new",
-      "allowedValues": [
-        "new",
-        "existing",
         "none"
       ],
       "metadata": {
@@ -101,17 +88,74 @@
         "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
       }
     },
-    "virtualnetName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the Azure virtual network."
-      }
-    },
-    "publicIPAddressName": {
+     "uniqueDnsPrefixForPublicIP3": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
-        "description": "Name of Public IP address element."
+        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
+      }
+    },
+     "uniqueDnsPrefixForPublicIP4": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
+      }
+    },
+     "uniqueDnsPrefixForPublicIP5": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
+      }
+    },
+     "uniqueDnsPrefixForPublicIP6": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
+      }
+    },
+     "uniqueDnsPrefixForPublicIP7": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
+      }
+    },
+     "uniqueDnsPrefixForPublicIP8": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
+      }
+    },
+     "uniqueDnsPrefixForPublicIP9": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
+      }
+    },
+     "uniqueDnsPrefixForPublicIP10": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
+      }
+    },
+     "uniqueDnsPrefixForPublicIP11": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
+      }
+    },
+     "uniqueDnsPrefixForPublicIP12": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Unique DNS Prefix for the Second Public IP used to access the Virtual Machine."
       }
     },
     "publicIPAddressResourceGroup": {
@@ -121,18 +165,18 @@
         "description": "Resource group to which the Public IP belongs."
       }
     },
-    "publicIPAddress2Name": {
+    "publicIPAddressName": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
         "description": "Name of Public IP address element."
       }
     },
-    "publicIPAddress2ResourceGroup": {
+    "publicIPAddress2Name": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
-        "description": "Resource group to which the Public IP belongs."
+        "description": "Name of Public IP address element."
       }
     },
     "publicIPAddress3Name": {
@@ -142,25 +186,11 @@
         "description": "Name of Public IP address element."
       }
     },
-    "publicIPAddress3ResourceGroup": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Resource group to which the Public IP belongs."
-      }
-    },
     "publicIPAddress4Name": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
         "description": "Name of Public IP address element."
-      }
-    },
-    "publicIPAddress4ResourceGroup": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Resource group to which the Public IP belongs."
       }
     },
     "publicIPAddress5Name": {
@@ -170,25 +200,11 @@
         "description": "Name of Public IP address element."
       }
     },
-    "publicIPAddress5ResourceGroup": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Resource group to which the Public IP belongs."
-      }
-    },
     "publicIPAddress6Name": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
         "description": "Name of Public IP address element."
-      }
-    },
-    "publicIPAddress6ResourceGroup": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Resource group to which the Public IP belongs."
       }
     },
     "publicIPAddress7Name": {
@@ -198,25 +214,11 @@
         "description": "Name of Public IP address element."
       }
     },
-    "publicIPAddress7ResourceGroup": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Resource group to which the Public IP belongs."
-      }
-    },
     "publicIPAddress8Name": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
         "description": "Name of Public IP address element."
-      }
-    },
-    "publicIPAddress8ResourceGroup": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Resource group to which the Public IP belongs."
       }
     },
     "publicIPAddress9Name": {
@@ -226,25 +228,11 @@
         "description": "Name of Public IP address element."
       }
     },
-    "publicIPAddress9ResourceGroup": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Resource group to which the Public IP belongs."
-      }
-    },
     "publicIPAddress10Name": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
         "description": "Name of Public IP address element."
-      }
-    },
-    "publicIPAddress10ResourceGroup": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Resource group to which the Public IP belongs."
       }
     },
     "publicIPAddress11Name": {
@@ -254,25 +242,11 @@
         "description": "Name of Public IP address element."
       }
     },
-    "publicIPAddress11ResourceGroup": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Resource group to which the Public IP belongs."
-      }
-    },
     "publicIPAddress12Name": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
         "description": "Name of Public IP address element."
-      }
-    },
-    "publicIPAddress12ResourceGroup": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Resource group to which the Public IP belongs."
       }
     },
     "publicIPAddressType": {
@@ -290,6 +264,12 @@
       "type": "string",
       "metadata": {
         "description": "Name for FortiGate virtual appliance."
+      }
+    },
+    "virtualnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Azure virtual network."
       }
     },
     "virtualNetworkExistingRGName": {
@@ -410,8 +390,7 @@
     "storage_Acct_1_Id": "[resourceId('Microsoft.Storage/storageAccounts',parameters('StorageAccountName'))]",
 
     "storageAccountSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','storageAccount-',parameters('storageAccountNewOrExisting'),'.json')]",
-    "publicIPSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','publicip-',parameters('publicIPNewOrExistingOrNone'),'.json')]",
-    "publicIP2SetupURL": "[concat(parameters('artifactsBaseUrl'),'/','publicip2-',parameters('publicIPNewOrExistingOrNone'),'.json')]",
+    "publicIPSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','publicip-',parameters('publicIPsNewOrNone'),'.json')]",
     "virtualNetworkSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','vnet-',parameters('vnetNewOrExisting'),'.json')]",
     "vMAndNICSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','vm-',parameters('VirtualMachineSize'),'.json')]"
   },
@@ -596,7 +575,7 @@
             "value": "[parameters('location')]"
           },
           "publicIPAddress2ResourceGroup": {
-            "value": "[parameters('publicIPAddress2ResourceGroup')]"
+            "value": "[parameters('publicIPAddressResourceGroup')]"
           },
           "publicIPAddress2Name": {
             "value": "[parameters('publicIPAddress2Name')]"
@@ -630,20 +609,83 @@
           "vmNamePrefix": {
             "value": "[parameters('vmNamePrefix')]"
           },
-          "publicIPAddressName": {
-            "value": "[parameters('publicIPAddressName')]"
-          },
           "publicIPAddressType": {
             "value": "[parameters('publicIPAddressType')]"
+          },
+          "publicIPAddressName": {
+            "value": "[parameters('publicIPAddressName')]"
           },
           "dnsName": {
             "value": "[parameters('uniqueDnsPrefixForPublicIP')]"
           },
+          "publicIPAddress2Name": {
+            "value": "[parameters('publicIPAddress2Name')]"
+          },
+          "dns2Name": {
+            "value": "[parameters('uniqueDnsPrefixForPublicIP2')]"
+          },
+          "publicIPAddress3Name": {
+            "value": "[parameters('publicIPAddress3Name')]"
+          },
+          "dns3Name": {
+            "value": "[parameters('uniqueDnsPrefixForPublicIP3')]"
+          },
+          "publicIPAddress4Name": {
+            "value": "[parameters('publicIPAddress4Name')]"
+          },
+          "dns4Name": {
+            "value": "[parameters('uniqueDnsPrefixForPublicIP4')]"
+          },
+          "publicIPAddress5Name": {
+            "value": "[parameters('publicIPAddress5Name')]"
+          },
+          "dns5Name": {
+            "value": "[parameters('uniqueDnsPrefixForPublicIP5')]"
+          },
+          "publicIPAddress6Name": {
+            "value": "[parameters('publicIPAddress6Name')]"
+          },
+          "dns6Name": {
+            "value": "[parameters('uniqueDnsPrefixForPublicIP6')]"
+          },
+          "publicIPAddress7Name": {
+            "value": "[parameters('publicIPAddress7Name')]"
+          },
+          "dns7Name": {
+            "value": "[parameters('uniqueDnsPrefixForPublicIP7')]"
+          },
+          "publicIPAddress8Name": {
+            "value": "[parameters('publicIPAddress8Name')]"
+          },
+          "dns8Name": {
+            "value": "[parameters('uniqueDnsPrefixForPublicIP8')]"
+          },
+          "publicIPAddress9Name": {
+            "value": "[parameters('publicIPAddress9Name')]"
+          },
+          "dns9Name": {
+            "value": "[parameters('uniqueDnsPrefixForPublicIP9')]"
+          },
+          "publicIPAddress10Name": {
+            "value": "[parameters('publicIPAddress10Name')]"
+          },
+          "dns10Name": {
+            "value": "[parameters('uniqueDnsPrefixForPublicIP10')]"
+          },
+          "publicIPAddress11Name": {
+            "value": "[parameters('publicIPAddress11Name')]"
+          },
+          "dns11Name": {
+            "value": "[parameters('uniqueDnsPrefixForPublicIP11')]"
+          },
+          "publicIPAddress12Name": {
+            "value": "[parameters('publicIPAddress12Name')]"
+          },
+          "dns12Name": {
+            "value": "[parameters('uniqueDnsPrefixForPublicIP12')]"
+          },
           "publicIPAddressResourceGroup": {
             "value": "[parameters('publicIPAddressResourceGroup')]"
-          },
-          "publicIP2ID": {
-            "value": "[reference('Microsoft.Resources/deployments/SettingUpPublicIP2', '2015-01-01').outputs.public2IPID.value]"
           },
           "VMName": {
             "value": "[variables('vmName')]"
