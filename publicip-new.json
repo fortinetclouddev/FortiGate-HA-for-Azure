@@ -611,7 +611,7 @@
               "backendPort": 4500,
               "enableFloatingIP": false
             }
-          }
+          },
           {
             "name": "[variables('network_LB_Public_NatRule_SSH_fg2_Name')]",
             "properties": {
