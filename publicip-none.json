@@ -14,16 +14,16 @@
         "description": "Resource Group"
       }
     },
-    "publicIPAddressName": {
-      "type": "string",
-      "metadata": {
-        "description": "Public IP Address Name"
-      }
-    },
     "publicIPAddressType": {
       "type": "string",
       "metadata": {
         "description": "Public IP Address Type (e.g. Static or Dynamic)"
+      }
+    },
+    "publicIPAddressName": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP Address Name"
       }
     },
     "dnsName": {
@@ -32,7 +32,145 @@
         "description": "Public IP DNS prefix (e.g. [dnsName].region.cloudapp.azure.com)"
       }
     },
+    "publicIPAddress2Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP Address Name"
+      }
+    },
+    "dns2Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP DNS prefix (e.g. [dnsName].region.cloudapp.azure.com)"
+      }
+    },
+    "publicIPAddress3Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP Address Name"
+      }
+    },
+    "dns3Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP DNS prefix (e.g. [dnsName].region.cloudapp.azure.com)"
+      }
+    },
+    "publicIPAddress4Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP Address Name"
+      }
+    },
+    "dns4Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP DNS prefix (e.g. [dnsName].region.cloudapp.azure.com)"
+      }
+    },
+    "publicIPAddress5Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP Address Name"
+      }
+    },
+    "dns5Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP DNS prefix (e.g. [dnsName].region.cloudapp.azure.com)"
+      }
+    },
+    "publicIPAddress6Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP Address Name"
+      }
+    },
+    "dns6Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP DNS prefix (e.g. [dnsName].region.cloudapp.azure.com)"
+      }
+    },
+    "publicIPAddress7Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP Address Name"
+      }
+    },
+    "dns7Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP DNS prefix (e.g. [dnsName].region.cloudapp.azure.com)"
+      }
+    },
+    "publicIPAddress8Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP Address Name"
+      }
+    },
+    "dns8Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP DNS prefix (e.g. [dnsName].region.cloudapp.azure.com)"
+      }
+    },
+    "publicIPAddress9Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP Address Name"
+      }
+    },
+    "dns9Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP DNS prefix (e.g. [dnsName].region.cloudapp.azure.com)"
+      }
+    },
+    "publicIPAddress10Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP Address Name"
+      }
+    },
+    "dns10Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP DNS prefix (e.g. [dnsName].region.cloudapp.azure.com)"
+      }
+    },
+    "publicIPAddress11Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP Address Name"
+      }
+    },
+    "dns11Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP DNS prefix (e.g. [dnsName].region.cloudapp.azure.com)"
+      }
+    },
+    "publicIPAddress12Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP Address Name"
+      }
+    },
+    "dns12Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Public IP DNS prefix (e.g. [dnsName].region.cloudapp.azure.com)"
+      }
+    },
     "VMName": {
+      "type": "string",
+      "metadata": {
+        "description": "FortiGate name"
+      }
+    },
+    "VM2Name": {
       "type": "string",
       "metadata": {
         "description": "FortiGate name"
@@ -53,7 +191,13 @@
     "FGPubFacingAddress": {
       "type": "string",
       "metadata": {
-        "description": "Outside address of FortiGate"
+        "description": "Outside address of FortiGate A"
+      }
+    },
+    "FGBPubFacingAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "Outside address of FortiGate B"
       }
     },
     "subnet1Ref": {
@@ -65,7 +209,13 @@
     "network_NIC_fg11_Name": {
       "type": "string",
       "metadata": {
-		  "description": "NIC0 interface name"
+        "description": "FortiGate A NIC0 interface name"
+      }
+    },
+    "network_NIC_fg21_Name": {
+      "type": "string",
+      "metadata": {
+        "description": "FortiGate B NIC0 interface name"
       }
     }
   },
