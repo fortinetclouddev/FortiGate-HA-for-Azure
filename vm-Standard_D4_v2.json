@@ -156,6 +156,9 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg23_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg13_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -176,6 +179,9 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg14_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg23_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -196,6 +202,9 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg24_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg14_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -216,6 +225,9 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg15_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg24_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -236,6 +248,9 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg25_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg15_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -256,6 +271,9 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg16_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg25_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -276,6 +294,9 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg26_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg16_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -296,6 +317,9 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg17_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg26_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -316,6 +340,9 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg27_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg17_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -336,6 +363,9 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg18_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg27_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -356,6 +386,9 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg28_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg18_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
@@ -383,7 +416,7 @@
         "product": "fortinet_fortigate-vm_v5"
       },
       "dependsOn": [
-        "[variables('network_NIC_fg12_Id')]",
+        "[variables('network_NIC_fg18_Id')]",
         "[variables('compute_AvailabilitySet_FG_Id')]"
       ],
       "properties": {
@@ -497,7 +530,7 @@
         "product": "fortinet_fortigate-vm_v5"
       },
       "dependsOn": [
-        "[variables('network_NIC_fg12_Id')]",
+        "[variables('network_NIC_fg28_Id')]",
         "[variables('compute_AvailabilitySet_FG_Id')]"
       ],
       "properties": {
@@ -601,5 +634,3 @@
     }
   ]
 }
-
-
