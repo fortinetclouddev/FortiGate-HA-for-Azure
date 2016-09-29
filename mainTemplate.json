@@ -216,6 +216,90 @@
         "description": "Subnet 2 Name"
       }
     },
+    "Subnet3Prefix": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Subnet 2 Prefix"
+      }
+    },
+    "Subnet3Name": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Subnet 2 Name"
+      }
+    },
+    "Subnet4Prefix": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Subnet 2 Prefix"
+      }
+    },
+    "Subnet4Name": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Subnet 2 Name"
+      }
+    },
+    "Subnet5Prefix": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Subnet 2 Prefix"
+      }
+    },
+    "Subnet5Name": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Subnet 2 Name"
+      }
+    },
+    "Subnet6Prefix": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Subnet 2 Prefix"
+      }
+    },
+    "Subnet6Name": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Subnet 2 Name"
+      }
+    },
+    "Subnet7Prefix": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Subnet 2 Prefix"
+      }
+    },
+    "Subnet7Name": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Subnet 2 Name"
+      }
+    },
+    "Subnet8Prefix": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Subnet 2 Prefix"
+      }
+    },
+    "Subnet8Name": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Subnet 2 Name"
+      }
+    },
     "fortiGateIP1": {
       "type": "string",
       "metadata": {
@@ -228,6 +312,42 @@
         "description": "Static IP for protected network facing NIC of the FortiGate virtual appliance."
       }
     },
+    "fortiGateIP3": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP for protected network facing NIC of the FortiGate virtual appliance."
+      }
+    },
+    "fortiGateIP4": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP for protected network facing NIC of the FortiGate virtual appliance."
+      }
+    },
+    "fortiGateIP5": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP for protected network facing NIC of the FortiGate virtual appliance."
+      }
+    },
+    "fortiGateIP6": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP for protected network facing NIC of the FortiGate virtual appliance."
+      }
+    },
+    "fortiGateIP7": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP for protected network facing NIC of the FortiGate virtual appliance."
+      }
+    },
+    "fortiGateIP8": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP for protected network facing NIC of the FortiGate virtual appliance."
+      }
+    },
     "fortiGateBIP1": {
       "type": "string",
       "metadata": {
@@ -235,6 +355,42 @@
       }
     },
     "fortiGateBIP2": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP for protected network facing NIC of the second FortiGate virtual appliance."
+      }
+    },
+    "fortiGateBIP3": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP for protected network facing NIC of the second FortiGate virtual appliance."
+      }
+    },
+    "fortiGateBIP4": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP for protected network facing NIC of the second FortiGate virtual appliance."
+      }
+    },
+    "fortiGateBIP5": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP for protected network facing NIC of the second FortiGate virtual appliance."
+      }
+    },
+    "fortiGateBIP6": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP for protected network facing NIC of the second FortiGate virtual appliance."
+      }
+    },
+    "fortiGateBIP7": {
+      "type": "string",
+      "metadata": {
+        "description": "Static IP for protected network facing NIC of the second FortiGate virtual appliance."
+      }
+    },
+    "fortiGateBIP8": {
       "type": "string",
       "metadata": {
         "description": "Static IP for protected network facing NIC of the second FortiGate virtual appliance."
@@ -447,6 +603,42 @@
           "subnet2AddressPrefix": {
             "value": "[parameters('Subnet2Prefix')]"
           },
+          "subnet3Name": {
+            "value": "[parameters('Subnet3Name')]"
+          },
+          "subnet3AddressPrefix": {
+            "value": "[parameters('Subnet3Prefix')]"
+          },
+          "subnet4Name": {
+            "value": "[parameters('Subnet4Name')]"
+          },
+          "subnet4AddressPrefix": {
+            "value": "[parameters('Subnet4Prefix')]"
+          },
+          "subnet5Name": {
+            "value": "[parameters('Subnet5Name')]"
+          },
+          "subnet5AddressPrefix": {
+            "value": "[parameters('Subnet5Prefix')]"
+          },
+          "subnet6Name": {
+            "value": "[parameters('Subnet6Name')]"
+          },
+          "subnet6AddressPrefix": {
+            "value": "[parameters('Subnet6Prefix')]"
+          },
+          "subnet7Name": {
+            "value": "[parameters('Subnet7Name')]"
+          },
+          "subnet7AddressPrefix": {
+            "value": "[parameters('Subnet7Prefix')]"
+          },
+          "subnet8Name": {
+            "value": "[parameters('Subnet8Name')]"
+          },
+          "subnet8AddressPrefix": {
+            "value": "[parameters('Subnet8Prefix')]"
+          },
           "vnetResourceGroup": {
             "value": "[parameters('virtualNetworkExistingRGName')]"
           },
@@ -572,11 +764,65 @@
           "subnet2Ref": {
             "value": "[reference('Microsoft.Resources/deployments/SettingUpVirtualNetwork', '2015-01-01').outputs.subnet2ID.value]"
           },
+          "subnet3Ref": {
+            "value": "[reference('Microsoft.Resources/deployments/SettingUpVirtualNetwork', '2015-01-01').outputs.subnet3ID.value]"
+          },
+          "subnet4Ref": {
+            "value": "[reference('Microsoft.Resources/deployments/SettingUpVirtualNetwork', '2015-01-01').outputs.subnet4ID.value]"
+          },
+          "subnet5Ref": {
+            "value": "[reference('Microsoft.Resources/deployments/SettingUpVirtualNetwork', '2015-01-01').outputs.subnet5ID.value]"
+          },
+          "subnet6Ref": {
+            "value": "[reference('Microsoft.Resources/deployments/SettingUpVirtualNetwork', '2015-01-01').outputs.subnet6ID.value]"
+          },
+          "subnet7Ref": {
+            "value": "[reference('Microsoft.Resources/deployments/SettingUpVirtualNetwork', '2015-01-01').outputs.subnet7ID.value]"
+          },
+          "subnet8Ref": {
+            "value": "[reference('Microsoft.Resources/deployments/SettingUpVirtualNetwork', '2015-01-01').outputs.subnet8ID.value]"
+          },
           "FGProtectedAddress": {
             "value": "[variables('FGProtectedAddress')]"
           },
           "FGBProtectedAddress": {
             "value": "[variables('FGBProtectedAddress')]"
+          },
+          "fortiGateIP3":{
+            "value": "[parameters('fortiGateIP3')]"
+          },
+          "fortiGateIP4":{
+            "value": "[parameters('fortiGateIP4')]"
+          },
+          "fortiGateIP5":{
+            "value": "[parameters('fortiGateIP5')]"
+          },
+          "fortiGateIP6":{
+            "value": "[parameters('fortiGateIP6')]"
+          },
+          "fortiGateIP7":{
+            "value": "[parameters('fortiGateIP7')]"
+          },
+          "fortiGateIP8":{
+            "value": "[parameters('fortiGateIP8')]"
+          },
+          "fortiGateBIP3":{
+            "value": "[parameters('fortiGateBIP3')]"
+          },
+          "fortiGateBIP4":{
+            "value": "[parameters('fortiGateBIP4')]"
+          },
+          "fortiGateBIP5":{
+            "value": "[parameters('fortiGateBIP5')]"
+          },
+          "fortiGateBIP6":{
+            "value": "[parameters('fortiGateBIP6')]"
+          },
+          "fortiGateBIP7":{
+            "value": "[parameters('fortiGateBIP7')]"
+          },
+          "fortiGateBIP8":{
+            "value": "[parameters('fortiGateBIP8')]"
           },
           "adminUsername": {
             "value": "[parameters('adminUsername')]"
