@@ -23,10 +23,64 @@
     "subnet2Ref": {
       "type": "string"
     },
+    "subnet3Ref": {
+      "type": "string"
+    },
+    "subnet4Ref": {
+      "type": "string"
+    },
+    "subnet5Ref": {
+      "type": "string"
+    },
+    "subnet6Ref": {
+      "type": "string"
+    },
+    "subnet7Ref": {
+      "type": "string"
+    },
+    "subnet8Ref": {
+      "type": "string"
+    },
     "FGProtectedAddress": {
       "type": "string"
     },
     "FGBProtectedAddress": {
+      "type": "string"
+    },
+    "fortiGateIP3":{
+      "type": "string"
+    },
+    "fortiGateIP4":{
+      "type": "string"
+    },
+    "fortiGateIP5":{
+      "type": "string"
+    },
+    "fortiGateIP6":{
+      "type": "string"
+    },
+    "fortiGateIP7":{
+      "type": "string"
+    },
+    "fortiGateIP8":{
+      "type": "string"
+    },
+    "fortiGateBIP3":{
+      "type": "string"
+    },
+    "fortiGateBIP4":{
+      "type": "string"
+    },
+    "fortiGateBIP5":{
+      "type": "string"
+    },
+    "fortiGateBIP6":{
+      "type": "string"
+    },
+    "fortiGateBIP7":{
+      "type": "string"
+    },
+    "fortiGateBIP8":{
       "type": "string"
     },
     "adminUsername": {
@@ -142,9 +196,10 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('fortiGateIP3')]",
               "subnet": {
-                "id": "[parameters('subnet2Ref')]"
+                "id": "[parameters('subnet3Ref')]"
               }
             }
           }
@@ -156,15 +211,19 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg23_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg13_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('fortiGateBIP3')]",
               "subnet": {
-                "id": "[parameters('subnet2Ref')]"
+                "id": "[parameters('subnet3Ref')]"
               }
             }
           }
@@ -176,15 +235,19 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg14_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg23_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('fortiGateIP4')]",
               "subnet": {
-                "id": "[parameters('subnet2Ref')]"
+                "id": "[parameters('subnet4Ref')]"
               }
             }
           }
@@ -196,15 +259,19 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg24_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg14_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('fortiGateBIP4')]",
               "subnet": {
-                "id": "[parameters('subnet2Ref')]"
+                "id": "[parameters('subnet4Ref')]"
               }
             }
           }
@@ -216,15 +283,19 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg15_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg24_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('fortiGateIP5')]",
               "subnet": {
-                "id": "[parameters('subnet2Ref')]"
+                "id": "[parameters('subnet5Ref')]"
               }
             }
           }
@@ -236,15 +307,19 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg25_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg15_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('fortiGateBIP5')]",
               "subnet": {
-                "id": "[parameters('subnet2Ref')]"
+                "id": "[parameters('subnet5Ref')]"
               }
             }
           }
@@ -256,15 +331,19 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg16_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg25_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('fortiGateIP6')]",
               "subnet": {
-                "id": "[parameters('subnet2Ref')]"
+                "id": "[parameters('subnet6Ref')]"
               }
             }
           }
@@ -276,15 +355,19 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg26_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg16_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('fortiGateBIP6')]",
               "subnet": {
-                "id": "[parameters('subnet2Ref')]"
+                "id": "[parameters('subnet6Ref')]"
               }
             }
           }
@@ -296,15 +379,19 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg17_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg26_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('fortiGateIP7')]",
               "subnet": {
-                "id": "[parameters('subnet2Ref')]"
+                "id": "[parameters('subnet7Ref')]"
               }
             }
           }
@@ -316,15 +403,19 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg27_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg17_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('fortiGateBIP7')]",
               "subnet": {
-                "id": "[parameters('subnet2Ref')]"
+                "id": "[parameters('subnet7Ref')]"
               }
             }
           }
@@ -336,15 +427,19 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg18_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg27_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('fortiGateIP8')]",
               "subnet": {
-                "id": "[parameters('subnet2Ref')]"
+                "id": "[parameters('subnet8Ref')]"
               }
             }
           }
@@ -356,15 +451,19 @@
       "apiVersion": "[variables('apiVer')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg28_Name')]",
+      "dependsOn": [
+        "[variables('network_NIC_fg18_Id')]"
+      ],
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('fortiGateBIP8')]",
               "subnet": {
-                "id": "[parameters('subnet2Ref')]"
+                "id": "[parameters('subnet8Ref')]"
               }
             }
           }
@@ -383,7 +482,7 @@
         "product": "fortinet_fortigate-vm_v5"
       },
       "dependsOn": [
-        "[variables('network_NIC_fg12_Id')]",
+        "[variables('network_NIC_fg18_Id')]",
         "[variables('compute_AvailabilitySet_FG_Id')]"
       ],
       "properties": {
@@ -497,7 +596,7 @@
         "product": "fortinet_fortigate-vm_v5"
       },
       "dependsOn": [
-        "[variables('network_NIC_fg12_Id')]",
+        "[variables('network_NIC_fg28_Id')]",
         "[variables('compute_AvailabilitySet_FG_Id')]"
       ],
       "properties": {
@@ -601,5 +700,3 @@
     }
   ]
 }
-
-
