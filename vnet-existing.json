@@ -121,13 +121,6 @@
       "metadata": {
         "description": "Virtual Network subnet Address Prefix (i.e. CIDR)"
       }
-    },
-    "routeTable1Name": {
-      "type": "string"
-    },
-    "routeTable2Name": {
-      "type": "string"
-    }
   },
   "variables": {
     "vnetID": "[resourceId(parameters('vnetResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
@@ -138,9 +131,7 @@
     "subnet5ID": "[concat(variables('vnetID'),'/subnets/',parameters('subnet5Name'))]",
     "subnet6ID": "[concat(variables('vnetID'),'/subnets/',parameters('subnet6Name'))]",
     "subnet7ID": "[concat(variables('vnetID'),'/subnets/',parameters('subnet7Name'))]",
-    "subnet8ID": "[concat(variables('vnetID'),'/subnets/',parameters('subnet8Name'))]",
-    "routeTable1Id": "[resourceId('Microsoft.Network/routeTables',parameters('routeTable1Name'))]",
-    "routeTable2Id": "[resourceId('Microsoft.Network/routeTables',parameters('routeTable2Name'))]"
+    "subnet8ID": "[concat(variables('vnetID'),'/subnets/',parameters('subnet8Name'))]"
   },
   "resources": [
   ],
