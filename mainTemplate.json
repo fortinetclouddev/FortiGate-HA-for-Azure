@@ -79,7 +79,7 @@
       "type": "string",
       "defaultValue": "",
       "metadata": {
-        "description": "Identifies whether to use new or existing Storage Account"
+        "description": "Identifies the resource group name of the virtual network"
       }
     },
     "virtualNetworkAddressPrefix": {
