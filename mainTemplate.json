@@ -330,12 +330,8 @@
     "vmName": "[concat(parameters('vmNamePrefix'),'-A')]",
     "vm2Name": "[concat(parameters('vmNamePrefix'),'-B')]",
 
-    "routeTable1Name": "[concat(variables('vmName'),'PublicFacingSubnetRoutes')]",
-    "routeTable2Name": "[concat(variables('vmName'),'ProtectedSubnetRoutes')]",
     "FGProtectedAddress": "[parameters('fortiGateIP2')]",
     "FGPubFacingAddress": "[parameters('fortiGateIP1')]",
-    "routeTable1BName": "[concat(variables('vm2Name'),'PublicFacingSubnetRoutes')]",
-    "routeTable2BName": "[concat(variables('vm2Name'),'ProtectedSubnetRoutes')]",
     "FGBProtectedAddress": "[parameters('fortiGateBIP2')]",
     "FGBPubFacingAddress": "[parameters('fortiGateBIP1')]",
     "apiVer": "2015-06-15",
@@ -383,10 +379,6 @@
       "name": "SettingUpVirtualNetwork",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "dependsOn": [
-        "[concat('Microsoft.Network/routeTables/', variables('routeTable1Name'))]",
-        "[concat('Microsoft.Network/routeTables/', variables('routeTable2Name'))]"
-      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
