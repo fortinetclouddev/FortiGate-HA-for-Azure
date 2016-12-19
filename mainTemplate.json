@@ -319,9 +319,6 @@
     "VNetName": "[parameters('virtualnetName')]",
     "Subnet1Name": "[parameters('Subnet1Name')]",
     "Subnet2Name": "[parameters('Subnet2Name')]",
-    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('VNetName'))]",
-    "subnet1Ref": "[concat(variables('vnetID'),'/subnets/', variables('Subnet1Name'))]",
-    "subnet2Ref": "[concat(variables('vnetID'),'/subnets/', variables('Subnet2Name'))]",
 
     "VNetAddressPrefix": "[parameters('virtualNetworkAddressPrefix')]",
     "Subnet1Prefix": "[parameters('Subnet1Prefix')]",
