@@ -128,7 +128,7 @@
       "type": "string",
       "defaultValue": "",
       "metadata": {
-        "description": "Identifies whether to use new or existing Storage Account"
+        "description": "Resource Group containing the virtual network - or new resource group from above (if new vnet)"
       }
     },
     "vnetAddressPrefix": {
@@ -197,8 +197,6 @@
     "compute_AvailabilitySet_FG_Name": "[concat(parameters('FortiGateNamePrefix'),'-AvailabilitySet')]",
     "compute_AvailabilitySet_FG_Id": "[resourceId('Microsoft.Compute/availabilitySets', variables('compute_AvailabilitySet_FG_Name'))]",
 
-    "storageAccountType": "[parameters('StorageAccountType')]",
-    "vmStorageAccountContainerName": "vhds",
     "vmSize": "[parameters('instanceType')]",
 
     "VNetName": "[parameters('vnetName')]",
@@ -566,7 +564,7 @@
       },
       "location": "[parameters('location')]",
       "plan": {
-        "name": "fortinet_fg-vm",
+        "name": "[parameters('FortiGateImageSKU')]",
         "publisher": "fortinet",
         "product": "fortinet_fortigate-vm_v5"
       },
@@ -576,8 +574,7 @@
       },
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'SettingUpPublicIPandFollowing')]",
-        "[concat('Microsoft.Network/networkInterfaces/',variables('network_NIC_fg12_Name'))]",
-        "[concat('Microsoft.Resources/deployments/', 'SettingUpStorageAccount')]"
+        "[concat('Microsoft.Network/networkInterfaces/',variables('network_NIC_fg12_Name'))]"
       ],
       "properties": {
         "hardwareProfile": {
@@ -591,17 +588,11 @@
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
-        "diagnosticsProfile": {
-          "bootDiagnostics": {
-            "enabled": true,
-            "storageUri": "[concat('http://', parameters('StorageAccountName'), '.blob.core.windows.net')]"
-          }
-        },
         "storageProfile": {
           "imageReference": {
             "publisher": "fortinet",
             "offer": "fortinet_fortigate-vm_v5",
-            "sku": "fortinet_fg-vm",
+            "sku": "[parameters('FortiGateImageSKU')]",
             "version": "latest"
           },
           "osDisk": {
@@ -642,7 +633,7 @@
       },
       "location": "[parameters('location')]",
       "plan": {
-        "sku": "[parameters('FortiGateImageSKU')]",
+        "name": "[parameters('FortiGateImageSKU')]",
         "publisher": "fortinet",
         "product": "fortinet_fortigate-vm_v5"
       },
@@ -652,8 +643,7 @@
       },
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'SettingUpPublicIPandFollowing')]",
-        "[concat('Microsoft.Network/networkInterfaces/',variables('network_NIC_fg22_Name'))]",
-        "[concat('Microsoft.Resources/deployments/', 'SettingUpStorageAccount')]"
+        "[concat('Microsoft.Network/networkInterfaces/',variables('network_NIC_fg22_Name'))]"
       ],
       "properties": {
         "hardwareProfile": {
@@ -675,7 +665,7 @@
             "version": "latest"
           },
           "osDisk": {
-            "createOption": "FromImage",
+            "createOption": "FromImage"
           },
           "dataDisks": [
             {
