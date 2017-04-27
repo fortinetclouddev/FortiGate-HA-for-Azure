@@ -211,16 +211,30 @@
     "Subnet1Prefix": "[parameters('Subnet1Prefix')]",
     "Subnet2Prefix": "[parameters('Subnet2Prefix')]",
 
+    "vmIPArray": "[split(parameters('fortiGateIP1'),'.')]",
+    "fg2IP1Array3": "[string(mod(add(int(variables('vmIPArray')[3]),1),256))]",
+    "fg2IP1Array2": "[string(mod(add(int(variables('vmIPArray')[2]),div(add(int(variables('vmIPArray')[3]),1),255)),256))]",
+    "fg2IP1Array1": "[string(mod(add(int(variables('vmIPArray')[1]),div(add(int(variables('vmIPArray')[2]),1),255)),256))]",
+    "fg2IP1Array0": "[string(mod(add(int(variables('vmIPArray')[0]),div(add(int(variables('vmIPArray')[1]),1),255)),256))]",
+    "fortiGateBIP1": "[string(concat(variables('fg2IP1Array0'),'.',variables('fg2IP1Array1'),'.',variables('fg2IP1Array2'),'.',variables('fg2IP1Array3')))]",
+
+    "vmIPArray2": "[split(parameters('fortiGateIP2'),'.')]",
+    "fg2IP2Array3": "[string(mod(add(int(variables('vmIPArray2')[3]),1),256))]",
+    "fg2IP2Array2": "[string(mod(add(int(variables('vmIPArray2')[2]),div(add(int(variables('vmIPArray2')[3]),1),255)),256))]",
+    "fg2IP2Array1": "[string(mod(add(int(variables('vmIPArray2')[1]),div(add(int(variables('vmIPArray2')[2]),1),255)),256))]",
+    "fg2IP2Array0": "[string(mod(add(int(variables('vmIPArray2')[0]),div(add(int(variables('vmIPArray2')[1]),1),255)),256))]",
+    "fortiGateBIP2": "[string(concat(variables('fg2IP2Array0'),'.',variables('fg2IP2Array1'),'.',variables('fg2IP2Array2'),'.',variables('fg2IP2Array3')))]",
+
     "vmName": "[concat(parameters('FortiGateNamePrefix'),'-A')]",
     "vm2Name": "[concat(parameters('FortiGateNamePrefix'),'-B')]",
 
-    "routeTable1Name": "[concat(variables('vmName'),'PublicFacingSubnetRoutes')]",
-    "routeTable2Name": "[concat(variables('vmName'),'ProtectedSubnetRoutes')]",
+    "routeTable1Name": "[concat(variables('Subnet1Name'),'-',variables('vmName'),'RouteTable')]",
+    "routeTable2Name": "[concat(variables('Subnet2Name'),'-',variables('vmName'),'RouteTable')]",
     "FGProtectedAddress": "[parameters('fortiGateIP2')]",
     "FGPubFacingAddress": "[parameters('fortiGateIP1')]",
-    "routeTable1BName": "[concat(variables('vm2Name'),'PublicFacingSubnetRoutes')]",
-    "routeTable2BName": "[concat(variables('vm2Name'),'ProtectedSubnetRoutes')]",
-    "scaleNumber": 1,
+    "routeTable1BName": "[concat(variables('Subnet1Name'),'-',variables('vm2Name'),'RouteTable')]",
+    "routeTable2BName": "[concat(variables('Subnet2Name'),'-',variables('vm2Name'),'RouteTable')]",
+
     "apiVer": "2015-06-15",
     "compute_VM_fg1_Name": "[variables('vmName')]",
     "compute_VM_fg2_Name": "[variables('vm2Name')]",
@@ -235,9 +249,7 @@
     "network_NIC_fg22_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg22_Name'))]",
 
     "publicIPSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','publicip-',parameters('publicIPNewOrExistingOrNone'),'-',parameters('publicIP2NewOrExistingOrNone'),'.json')]",
-    "virtualNetworkSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','vnet-',parameters('vnetNewOrExisting'),'.json')]",
-    "FortiGateBIP1URL": "[concat(parameters('artifactsBaseUrl'),'/','GetFortiGateBIP1.json')]",
-    "FortiGateBIP2URL": "[concat(parameters('artifactsBaseUrl'),'/','GetFortiGateBIP2.json')]"
+    "virtualNetworkSetupURL": "[concat(parameters('artifactsBaseUrl'),'/','vnet-',parameters('vnetNewOrExisting'),'.json')]"
   },
   "resources": [
     {
@@ -265,7 +277,7 @@
       "properties": {
         "routes": [
           {
-            "name": "PublicFacingtoFortigateProtected",
+            "name": "[concat('to',variables('Subnet2Name'))]",
             "properties": {
               "addressPrefix": "[variables('subnet2Prefix')]",
               "nextHopType": "VirtualAppliance",
@@ -286,7 +298,7 @@
       "properties": {
         "routes": [
           {
-            "name": "FortigateProtectedtoPublicFacing",
+            "name": "[concat('to',variables('Subnet1Name'))]",
             "properties": {
               "addressPrefix": "[variables('subnet1Prefix')]",
               "nextHopType": "VirtualAppliance",
@@ -294,7 +306,7 @@
             }
           },
           {
-            "name": "FortigateProtectedtoDefault",
+            "name": "toDefault",
             "properties": {
               "AddressPrefix": "0.0.0.0/0",
               "nextHopType": "VirtualAppliance",
@@ -302,40 +314,6 @@
             }
           }
         ]
-      }
-    },
-    {
-      "name": "GetFortiGateBIP1",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('FortiGateBIP1URL')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "FortiGateIP1": {
-            "value": "[parameters('FortiGateIP1')]"
-          }
-        }
-      }
-    },
-    {
-      "name": "GetFortiGateBIP2",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('FortiGateBIP2URL')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "FortiGateIP2": {
-            "value": "[parameters('FortiGateIP2')]"
-          }
-        }
       }
     },
     {
@@ -349,11 +327,11 @@
       "properties": {
         "routes": [
           {
-            "name": "PublicFacingtoFortigateProtected",
+            "name": "[concat('to',variables('Subnet2Name'))]",
             "properties": {
               "addressPrefix": "[variables('subnet2Prefix')]",
               "nextHopType": "VirtualAppliance",
-              "nextHopIpAddress": "[reference('Microsoft.Resources/deployments/GetFortiGateBIP1', '2015-01-01').outputs.FortiGateBIP1.value]"
+              "nextHopIpAddress": "[variables('fortiGateBIP1')]"
             }
           }
         ]
@@ -370,19 +348,19 @@
       "properties": {
         "routes": [
           {
-            "name": "FortigateProtectedtoPublicFacing",
+            "name": "[concat('to',variables('Subnet1Name'))]",
             "properties": {
               "addressPrefix": "[variables('subnet1Prefix')]",
               "nextHopType": "VirtualAppliance",
-              "nextHopIpAddress": "[reference('Microsoft.Resources/deployments/GetFortiGateBIP2', '2015-01-01').outputs.FortiGateBIP2.value]"
+              "nextHopIpAddress": "[variables('fortiGateBIP2')]"
             }
           },
           {
-            "name": "FortigateProtectedtoDefault",
+            "name": "toDefault",
             "properties": {
               "AddressPrefix": "0.0.0.0/0",
               "nextHopType": "VirtualAppliance",
-              "nextHopIPAddress": "[reference('Microsoft.Resources/deployments/GetFortiGateBIP2', '2015-01-01').outputs.FortiGateBIP2.value]"
+              "nextHopIPAddress": "[variables('fortiGateBIP2')]"
             }
           }
         ]
@@ -484,7 +462,7 @@
             "value": "[variables('FGPubFacingAddress')]"
           },
           "FGBPubFacingAddress": {
-            "value": "[reference('Microsoft.Resources/deployments/GetFortiGateBIP1', '2015-01-01').outputs.FortiGateBIP1.value]"
+            "value": "[variables('fortiGateBIP1')]"
           },
           "subnet1Ref": {
             "value": "[variables('subnet1Ref')]"
@@ -545,7 +523,7 @@
             "name": "ipconfig1",
             "properties": {
               "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[reference('Microsoft.Resources/deployments/GetFortiGateBIP2', '2015-01-01').outputs.FortiGateBIP2.value]",
+              "privateIPAddress": "[variables('fortiGateBIP2')]",
               "subnet": {
                 "id": "[variables('subnet2Ref')]"
               }
@@ -558,7 +536,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[variables('compute_VM_fg1_Name')]",
-      "apiVersion": "[variables('apiVer')]",
+      "apiVersion": "2016-04-30-preview",
       "tags": {
        "provider": "[toUpper(parameters('FortinetTags').provider)]"
       },
@@ -567,10 +545,6 @@
         "name": "[parameters('FortiGateImageSKU')]",
         "publisher": "fortinet",
         "product": "fortinet_fortigate-vm_v5"
-      },
-      "copy": {
-        "name": "vmLoop",
-        "count": "[variables('scaleNumber')]"
       },
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'SettingUpPublicIPandFollowing')]",
@@ -627,7 +601,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[variables('compute_VM_fg2_Name')]",
-      "apiVersion": "[variables('apiVer')]",
+      "apiVersion": "2016-04-30-preview",
       "tags": {
        "provider": "[toUpper(parameters('FortinetTags').provider)]"
       },
@@ -636,10 +610,6 @@
         "name": "[parameters('FortiGateImageSKU')]",
         "publisher": "fortinet",
         "product": "fortinet_fortigate-vm_v5"
-      },
-      "copy": {
-        "name": "vmLoop",
-        "count": "[variables('scaleNumber')]"
       },
       "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'SettingUpPublicIPandFollowing')]",

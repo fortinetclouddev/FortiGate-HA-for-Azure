@@ -91,8 +91,8 @@
     }
   },
   "variables": {
-    "publicIPID": "[resourceID('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
-    "publicIP2ID": "[resourceID('Microsoft.Network/publicIPAddresses',parameters('publicIPAddress2Name'))]",
+    "publicIPID": "[resourceID(parameters('publicIPAddressResourceGroup'),'Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]",
+    "publicIP2ID": "[resourceID(parameters('publicIPAddressResourceGroup'),'Microsoft.Network/publicIPAddresses',parameters('publicIPAddress2Name'))]",
     "network_LB_Public_NatRule_FGAdminPerm_fg1_Name": "[concat(parameters('VMName'),'FGAdminPerm')]",
     "network_LB_Public_NatRule_FGAdminPerm_fg1_Id": "[concat(variables('network_LB_Public_Id'),'/inboundNatRules/',variables('network_LB_Public_NatRule_FGAdminPerm_fg1_Name'))]",
     "network_LB_Public_NatRule_SSH_fg1_Name": "[concat(parameters('VMName'),'SSH')]",
@@ -113,30 +113,6 @@
   },
   "resources": [
     {
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[parameters('publicIPAddress2Name')]",
-      "apiVersion": "[variables('apiVer')]",
-      "tags": {
-       "provider": "[toUpper(parameters('FortinetTags').provider)]"
-      },
-      "location": "[parameters('location')]",
-      "properties": {
-        "publicIPAllocationMethod": "[parameters('publicIPAddressType')]"
-      }
-    },
-    {
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[parameters('publicIPAddressName')]",
-      "apiVersion": "[variables('apiVer')]",
-      "tags": {
-       "provider": "[toUpper(parameters('FortinetTags').provider)]"
-      },
-      "location": "[parameters('location')]",
-      "properties": {
-        "publicIPAllocationMethod": "[parameters('publicIPAddressType')]"
-      }
-    },
-    {
       "type": "Microsoft.Network/loadBalancers",
       "name": "[variables('network_LB_Public_Name')]",
       "apiVersion": "[variables('apiVer')]",
@@ -145,8 +121,7 @@
       },
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[variables('publicIPID')]",
-        "[variables('publicIP2ID')]"
+        "[variables('publicIPID')]"
       ],
       "properties": {
         "frontendIPConfigurations": [

@@ -125,18 +125,6 @@
       }
     },
     {
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[parameters('publicIPAddressName')]",
-      "apiVersion": "[variables('apiVer')]",
-      "tags": {
-       "provider": "[toUpper(parameters('FortinetTags').provider)]"
-      },
-      "location": "[parameters('location')]",
-      "properties": {
-        "publicIPAllocationMethod": "[parameters('publicIPAddressType')]"
-      }
-    },
-    {
       "type": "Microsoft.Network/loadBalancers",
       "name": "[variables('network_LB_Public_Name')]",
       "apiVersion": "[variables('apiVer')]",
@@ -145,19 +133,10 @@
       },
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[variables('publicIPID')]",
         "[variables('publicIP2ID')]"
       ],
       "properties": {
         "frontendIPConfigurations": [
-          {
-            "name": "[variables('network_LB_Public_FEName')]",
-            "properties": {
-              "publicIPAddress": {
-                "id": "[variables('publicIPID')]"
-              }
-            }
-          },
           {
             "name": "[variables('network_LB_Public_FE2Name')]",
             "properties": {
@@ -173,30 +152,6 @@
           }
         ],
         "inboundNatRules": [
-          {
-            "name": "[variables('network_LB_Public_NatRule_SSH_fg1_Name')]",
-            "properties": {
-              "frontendIPConfiguration": {
-                "id": "[variables('network_LB_Public_FEId')]"
-              },
-              "protocol": "tcp",
-              "frontendPort": 22,
-              "backendPort": 22,
-              "enableFloatingIP": false
-            }
-          },
-          {
-            "name": "[variables('network_LB_Public_NatRule_FGAdminPerm_fg1_Name')]",
-            "properties": {
-              "frontendIPConfiguration": {
-                "id": "[variables('network_LB_Public_FEId')]"
-              },
-              "protocol": "tcp",
-              "frontendPort": 443,
-              "backendPort": 443,
-              "enableFloatingIP": false
-            }
-          },
           {
             "name": "[variables('network_LB_Public_NatRule_SSH_fg2_Name')]",
             "properties": {
@@ -259,14 +214,6 @@
               "loadBalancerBackendAddressPools": [
                 {
                   "id": "[variables('network_LB_Public_BEId')]"
-                }
-              ],
-              "loadBalancerInboundNatRules": [
-                {
-                  "id": "[variables('network_LB_Public_NatRule_SSH_fg1_Id')]"
-                },
-                {
-                  "id": "[variables('network_LB_Public_NatRule_FGAdminPerm_fg1_Id')]"
                 }
               ]
             }
