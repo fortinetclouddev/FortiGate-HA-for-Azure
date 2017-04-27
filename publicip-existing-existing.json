@@ -120,9 +120,6 @@
        "provider": "[toUpper(parameters('FortinetTags').provider)]"
       },
       "location": "[parameters('location')]",
-      "dependsOn": [
-        "[variables('publicIPID')]"
-      ],
       "properties": {
         "frontendIPConfigurations": [
           {
