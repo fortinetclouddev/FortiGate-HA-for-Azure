@@ -50,9 +50,7 @@
           "password": "FortiGate password",
           "confirmPassword": "Confirm password"
         },
-        "toolTip": {
-          "password": "Admin account password for the virtual FortiGate"
-        },
+        "toolTip": "Admin account password for the FortiGate virtual appliance",
         "constraints": {
           "required": true,
           "regex": "^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\\d\\W])|(?=.*\\W)(?=.*\\d))|(?=.*\\W)(?=.*[A-Z])(?=.*\\d)).{12,123}$",
