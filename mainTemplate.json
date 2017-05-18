@@ -228,12 +228,16 @@
     "vmName": "[concat(parameters('FortiGateNamePrefix'),'-A')]",
     "vm2Name": "[concat(parameters('FortiGateNamePrefix'),'-B')]",
 
-    "routeTable1Name": "[concat(variables('Subnet1Name'),'-',variables('vmName'),'RouteTable')]",
-    "routeTable2Name": "[concat(variables('Subnet2Name'),'-',variables('vmName'),'RouteTable')]",
-    "FGProtectedAddress": "[parameters('fortiGateIP2')]",
-    "FGPubFacingAddress": "[parameters('fortiGateIP1')]",
-    "routeTable1BName": "[concat(variables('Subnet1Name'),'-',variables('vm2Name'),'RouteTable')]",
-    "routeTable2BName": "[concat(variables('Subnet2Name'),'-',variables('vm2Name'),'RouteTable')]",
+    "routeTable1Name": "[concat(variables('Subnet1Name'),'-',parameters('FortiGateNamePrefix'),'RouteTable')]",
+    "routeTable2Name": "[concat(variables('Subnet2Name'),'-',parameters('FortiGateNamePrefix'),'RouteTable')]",
+    "subnet1KnownIP": "[parameters('fortiGateIP2')]",
+    "subnet2KnownIP": "[parameters('fortiGateIP1')]",
+
+    "internalLBName": "[concat(parameters('FortiGateNamePrefix'),'-InternalLoadBalancer')]",
+    "internalLBFE1Name": "[concat(parameters('FortiGateNamePrefix'),'-ILB-'),(variables('Subnet1Name'),'-FrontEnd')]",
+    "internalLBFE2Name": "[concat(parameters('FortiGateNamePrefix'),'-ILB-'),(variables('Subnet2Name'),'-FrontEnd')]",
+    "internalLBBE1Name": "[concat(parameters('FortiGateNamePrefix'),'-ILB-'),(variables('Subnet1Name'),'-BackEnd')]",
+    "internalLBBE2Name": "[concat(parameters('FortiGateNamePrefix'),'-ILB-'),(variables('Subnet2Name'),'-BackEnd')]",
 
     "apiVer": "2015-06-15",
     "compute_VM_fg1_Name": "[variables('vmName')]",
@@ -344,7 +348,7 @@
       "name": "[variables('routeTable2BName')]",
       "apiVersion": "[variables('apiVer')]",
       "tags": {
-       "provider": "[toUpper(parameters('FortinetTags').provider)]"
+        "provider": "[toUpper(parameters('FortinetTags').provider)]"
       },
       "location": "[parameters('location')]",
       "properties": {
@@ -364,6 +368,178 @@
               "nextHopType": "VirtualAppliance",
               "nextHopIPAddress": "[variables('fortiGateBIP2')]"
             }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/loadBalancers",
+      "name": "[variables('internalLBName')]",
+      "apiVersion": "[variables('apiVer')]",
+      "tags": {
+       "provider": "[toUpper(parameters('FortinetTags').provider)]"
+      },
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/routeTables/', variables('routeTable1Name'))]",
+        "[concat('Microsoft.Network/routeTables/', variables('routeTable2Name'))]"
+      ],
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "name": "[variables('internalLBFE1Name')]",
+            "properties": {
+              "privateIPAddress": "[variables('subnet1KnownIP')]",
+              "privateIPAllocationMethod": "Static",
+              "subnet": {
+                "id": "variables('subnet1Ref')"
+              }
+            }
+          },
+          {
+            "name": "[variables('internalLBFE2Name')]",
+            "properties": {
+              "privateIPAddress": "[variables('subnet2KnownIP')]",
+              "privateIPAllocationMethod": "Static",
+              "subnet": {
+                "id": "variables('subnet2Ref')"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "[variables('internalLBBE1Name')]"
+          },
+          {
+            "name": "[variables('internalLBBE2Name')]"
+          }
+        ],
+        "loadBalancingRules": [
+          {
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/frontendIpConfigurations/', variables('internalLBFE1Name'))]"
+              },
+              "backendAddressPool": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/backendAddressPools/', variables('internalLBBE1Name'))]"
+              },
+              "probe": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/probes/lbprobe')]"
+              },
+              "protocol": "Tcp",
+              "frontendPort": 80,
+              "backendPort": 80,
+              "enableFloatingIP": true,
+              "idleTimeoutInMinutes": 15
+            },
+            "name": "lbruleFE1tcp80"
+          },
+          {
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/frontendIpConfigurations/', variables('internalLBFE1Name'))]"
+              },
+              "backendAddressPool": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/backendAddressPools/', variables('internalLBBE1Name'))]"
+              },
+              "probe": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/probes/lbprobe')]"
+              },
+              "protocol": "Tcp",
+              "frontendPort": 443,
+              "backendPort": 443,
+              "enableFloatingIP": true,
+              "idleTimeoutInMinutes": 15
+            },
+            "name": "lbruleFE1tcp443"
+          },
+          {
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/frontendIpConfigurations/', variables('internalLBFE1Name'))]"
+              },
+              "backendAddressPool": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/backendAddressPools/', variables('internalLBBE1Name'))]"
+              },
+              "probe": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/probes/lbprobe')]"
+              },
+              "protocol": "Tcp",
+              "frontendPort": 22,
+              "backendPort": 22,
+              "enableFloatingIP": true,
+              "idleTimeoutInMinutes": 15
+            },
+            "name": "lbruleFE1tcp22"
+          },
+          {
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/frontendIpConfigurations/', variables('internalLBFE2Name'))]"
+              },
+              "backendAddressPool": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/backendAddressPools/', variables('internalLBBE2Name'))]"
+              },
+              "probe": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/probes/lbprobe')]"
+              },
+              "protocol": "Tcp",
+              "frontendPort": 80,
+              "backendPort": 80,
+              "enableFloatingIP": true,
+              "idleTimeoutInMinutes": 15
+            },
+            "name": "lbruleFE2tcp80"
+          },
+          {
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/frontendIpConfigurations/', variables('internalLBFE2Name'))]"
+              },
+              "backendAddressPool": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/backendAddressPools/', variables('internalLBBE2Name'))]"
+              },
+              "probe": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/probes/lbprobe')]"
+              },
+              "protocol": "Tcp",
+              "frontendPort": 443,
+              "backendPort": 443,
+              "enableFloatingIP": true,
+              "idleTimeoutInMinutes": 15
+            },
+            "name": "lbruleFE2tcp443"
+          },
+          {
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/frontendIpConfigurations/', variables('internalLBFE2Name'))]"
+              },
+              "backendAddressPool": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/backendAddressPools/', variables('internalLBBE2Name'))]"
+              },
+              "probe": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/probes/lbprobe')]"
+              },
+              "protocol": "Tcp",
+              "frontendPort": 22,
+              "backendPort": 22,
+              "enableFloatingIP": true,
+              "idleTimeoutInMinutes": 15
+            },
+            "name": "lbruleFE2tcp22"
+          }
+        ],
+        "probes": [
+          {
+            "properties": {
+              "protocol": "Tcp",
+              "port": 22,
+              "intervalInSeconds": 5,
+              "numberOfProbes": 2
+            },
+            "name": "lbprobe"
           }
         ]
       }
@@ -460,12 +636,6 @@
           "VM2Name": {
             "value": "[variables('vm2Name')]"
           },
-          "FGPubFacingAddress": {
-            "value": "[variables('FGPubFacingAddress')]"
-          },
-          "FGBPubFacingAddress": {
-            "value": "[variables('fortiGateBIP1')]"
-          },
           "subnet1Ref": {
             "value": "[variables('subnet1Ref')]"
           },
@@ -498,7 +668,6 @@
             "name": "ipconfig1",
             "properties": {
               "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[variables('FGProtectedAddress')]",
               "subnet": {
                 "id": "[variables('subnet2Ref')]"
               }
@@ -525,7 +694,6 @@
             "name": "ipconfig1",
             "properties": {
               "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[variables('fortiGateBIP2')]",
               "subnet": {
                 "id": "[variables('subnet2Ref')]"
               }

@@ -56,18 +56,6 @@
         "description": "VM set prefix"
       }
     },
-    "FGPubFacingAddress": {
-      "type": "string",
-      "metadata": {
-        "description": "Outside address of FortiGate A"
-      }
-    },
-    "FGBPubFacingAddress": {
-      "type": "string",
-      "metadata": {
-        "description": "Outside address of FortiGate B"
-      }
-    },
     "subnet1Ref": {
       "type": "string",
       "metadata": {
@@ -252,7 +240,6 @@
             "name": "ipconfig1",
             "properties": {
               "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[parameters('FGPubFacingAddress')]",
               "subnet": {
                 "id": "[parameters('subnet1Ref')]"
               },
@@ -292,7 +279,6 @@
             "name": "ipconfig1",
             "properties": {
               "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[parameters('FGBPubFacingAddress')]",
               "subnet": {
                 "id": "[parameters('subnet1Ref')]"
               },
