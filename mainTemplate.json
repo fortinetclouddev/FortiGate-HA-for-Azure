@@ -152,7 +152,7 @@
         "description": "Subnet 1 Prefix"
       }
     },
-    "fortiGateIP1": {
+    "subnet1LoadBalancerIP": {
       "type": "string",
       "metadata": {
         "description": "Static IP for public facing NIC of the FortiGate virtual appliance."
@@ -172,7 +172,7 @@
         "description": "Subnet 2 Prefix"
       }
     },
-    "fortiGateIP2": {
+    "subnet2LoadBalancerIP": {
       "type": "string",
       "metadata": {
         "description": "Static IP for protected network facing NIC of the FortiGate virtual appliance."
@@ -211,14 +211,14 @@
     "Subnet1Prefix": "[parameters('Subnet1Prefix')]",
     "Subnet2Prefix": "[parameters('Subnet2Prefix')]",
 
-    "vmIPArray": "[split(parameters('fortiGateIP1'),'.')]",
+    "vmIPArray": "[split(parameters('subnet1LoadBalancerIP'),'.')]",
     "fg2IP1Array3": "[string(mod(add(int(variables('vmIPArray')[3]),1),256))]",
     "fg2IP1Array2": "[string(mod(add(int(variables('vmIPArray')[2]),div(add(int(variables('vmIPArray')[3]),1),255)),256))]",
     "fg2IP1Array1": "[string(mod(add(int(variables('vmIPArray')[1]),div(add(int(variables('vmIPArray')[2]),1),255)),256))]",
     "fg2IP1Array0": "[string(mod(add(int(variables('vmIPArray')[0]),div(add(int(variables('vmIPArray')[1]),1),255)),256))]",
     "fortiGateBIP1": "[string(concat(variables('fg2IP1Array0'),'.',variables('fg2IP1Array1'),'.',variables('fg2IP1Array2'),'.',variables('fg2IP1Array3')))]",
 
-    "vmIPArray2": "[split(parameters('fortiGateIP2'),'.')]",
+    "vmIPArray2": "[split(parameters('subnet2LoadBalancerIP'),'.')]",
     "fg2IP2Array3": "[string(mod(add(int(variables('vmIPArray2')[3]),1),256))]",
     "fg2IP2Array2": "[string(mod(add(int(variables('vmIPArray2')[2]),div(add(int(variables('vmIPArray2')[3]),1),255)),256))]",
     "fg2IP2Array1": "[string(mod(add(int(variables('vmIPArray2')[1]),div(add(int(variables('vmIPArray2')[2]),1),255)),256))]",
@@ -230,14 +230,17 @@
 
     "routeTable1Name": "[concat(variables('Subnet1Name'),'-',parameters('FortiGateNamePrefix'),'RouteTable')]",
     "routeTable2Name": "[concat(variables('Subnet2Name'),'-',parameters('FortiGateNamePrefix'),'RouteTable')]",
-    "subnet1KnownIP": "[parameters('fortiGateIP2')]",
-    "subnet2KnownIP": "[parameters('fortiGateIP1')]",
+    "subnet1KnownIP": "[parameters('subnet2LoadBalancerIP')]",
+    "subnet2KnownIP": "[parameters('subnet1LoadBalancerIP')]",
 
     "internalLBName": "[concat(parameters('FortiGateNamePrefix'),'-InternalLoadBalancer')]",
-    "internalLBFE1Name": "[concat(parameters('FortiGateNamePrefix'),'-ILB-'),(variables('Subnet1Name'),'-FrontEnd')]",
-    "internalLBFE2Name": "[concat(parameters('FortiGateNamePrefix'),'-ILB-'),(variables('Subnet2Name'),'-FrontEnd')]",
-    "internalLBBE1Name": "[concat(parameters('FortiGateNamePrefix'),'-ILB-'),(variables('Subnet1Name'),'-BackEnd')]",
-    "internalLBBE2Name": "[concat(parameters('FortiGateNamePrefix'),'-ILB-'),(variables('Subnet2Name'),'-BackEnd')]",
+    "internalLBFE1Name": "[concat(parameters('FortiGateNamePrefix'),'-ILB-',variables('Subnet1Name'),'-FrontEnd')]",
+    "internalLBFE2Name": "[concat(parameters('FortiGateNamePrefix'),'-ILB-',variables('Subnet2Name'),'-FrontEnd')]",
+    "internalLBBE1Name": "[concat(parameters('FortiGateNamePrefix'),'-ILB-',variables('Subnet1Name'),'-BackEnd')]",
+    "internalLBBE2Name": "[concat(parameters('FortiGateNamePrefix'),'-ILB-',variables('Subnet2Name'),'-BackEnd')]",
+    "internalLBid": "[resourceID('Microsoft.Network/loadBalancers',variables('internalLBName'))]",
+    "internalLB_BE1Id": "[concat(variables('internalLBid'),'/backendAddressPools/',variables('internalLBBE1Name'))]",
+    "internalLB_BE2Id": "[concat(variables('internalLBid'),'/backendAddressPools/',variables('internalLBBE2Name'))]",
 
     "apiVer": "2015-06-15",
     "compute_VM_fg1_Name": "[variables('vmName')]",
@@ -317,56 +320,6 @@
               "AddressPrefix": "0.0.0.0/0",
               "nextHopType": "VirtualAppliance",
               "nextHopIPAddress": "[variables('FGProtectedAddress')]"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "Microsoft.Network/routeTables",
-      "name": "[variables('routeTable1BName')]",
-      "apiVersion": "[variables('apiVer')]",
-      "tags": {
-       "provider": "[toUpper(parameters('FortinetTags').provider)]"
-      },
-      "location": "[parameters('location')]",
-      "properties": {
-        "routes": [
-          {
-            "name": "[concat('to',variables('Subnet2Name'))]",
-            "properties": {
-              "addressPrefix": "[variables('subnet2Prefix')]",
-              "nextHopType": "VirtualAppliance",
-              "nextHopIpAddress": "[variables('fortiGateBIP1')]"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "Microsoft.Network/routeTables",
-      "name": "[variables('routeTable2BName')]",
-      "apiVersion": "[variables('apiVer')]",
-      "tags": {
-        "provider": "[toUpper(parameters('FortinetTags').provider)]"
-      },
-      "location": "[parameters('location')]",
-      "properties": {
-        "routes": [
-          {
-            "name": "[concat('to',variables('Subnet1Name'))]",
-            "properties": {
-              "addressPrefix": "[variables('subnet1Prefix')]",
-              "nextHopType": "VirtualAppliance",
-              "nextHopIpAddress": "[variables('fortiGateBIP2')]"
-            }
-          },
-          {
-            "name": "toDefault",
-            "properties": {
-              "AddressPrefix": "0.0.0.0/0",
-              "nextHopType": "VirtualAppliance",
-              "nextHopIPAddress": "[variables('fortiGateBIP2')]"
             }
           }
         ]
@@ -645,6 +598,9 @@
           "network_NIC_fg21_Name": {
             "value": "[variables('network_NIC_fg21_Name')]"
           },
+          "internalLB_BE1Id": {
+            "value": "[variables('internalLB_BE1Id')]"
+          },
           "FortinetTags": {
             "value": "[parameters('FortinetTags')]"
           }
@@ -670,7 +626,12 @@
               "privateIPAllocationMethod": "Static",
               "subnet": {
                 "id": "[variables('subnet2Ref')]"
-              }
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[parameters('internalLB_BE2Id')]"
+                }
+              ]
             }
           }
         ],
@@ -696,7 +657,12 @@
               "privateIPAllocationMethod": "Static",
               "subnet": {
                 "id": "[variables('subnet2Ref')]"
-              }
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[parameters('internalLB_BE2Id')]"
+                }
+              ]
             }
           }
         ],
