@@ -245,7 +245,7 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Static",
+              "privateIPAllocationMethod": "Dyanmic",
               "subnet": {
                 "id": "[parameters('subnet1Ref')]"
               },
@@ -287,7 +287,7 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Static",
+              "privateIPAllocationMethod": "Dynamic",
               "subnet": {
                 "id": "[parameters('subnet1Ref')]"
               },
