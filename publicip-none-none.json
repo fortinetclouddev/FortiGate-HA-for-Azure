@@ -56,18 +56,6 @@
         "description": "VM set prefix"
       }
     },
-    "FGPubFacingAddress": {
-      "type": "string",
-      "metadata": {
-        "description": "Outside address of FortiGate A"
-      }
-    },
-    "FGBPubFacingAddress": {
-      "type": "string",
-      "metadata": {
-        "description": "Outside address of FortiGate B"
-      }
-    },
     "subnet1Ref": {
       "type": "string",
       "metadata": {
@@ -84,6 +72,12 @@
       "type": "string",
       "metadata": {
         "description": "FortiGate B NIC0 interface name"
+      }
+    },
+    "internalLB_BE1Id": {
+      "type": "string",
+      "metadata": {
+        "description": "internal load balancer backend1 id"
       }
     },
     "FortinetTags": {
@@ -107,11 +101,15 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[parameters('FGPubFacingAddress')]",
+              "privateIPAllocationMethod": "Dynamic",
               "subnet": {
                 "id": "[parameters('subnet1Ref')]"
-              }
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[parameters('internalLB_BE1Id')]"
+                }
+              ]
             }
           }
         ],
@@ -131,11 +129,15 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "[parameters('FGBPubFacingAddress')]",
+              "privateIPAllocationMethod": "Dynamic",
               "subnet": {
                 "id": "[parameters('subnet1Ref')]"
-              }
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[parameters('internalLB_BE1Id')]"
+                }
+              ]
             }
           }
         ],
