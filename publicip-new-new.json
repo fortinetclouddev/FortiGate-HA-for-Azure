@@ -252,9 +252,6 @@
               "loadBalancerBackendAddressPools": [
                 {
                   "id": "[variables('network_LB_Public_BEId')]"
-                },
-                {
-                  "id": "[parameters('internalLB_BE1Id')]"
                 }
               ],
               "loadBalancerInboundNatRules": [
@@ -294,9 +291,6 @@
               "loadBalancerBackendAddressPools": [
                 {
                   "id": "[variables('network_LB_Public_BEId')]"
-                },
-                {
-                  "id": "[parameters('internalLB_BE1Id')]"
                 }
               ],
               "loadBalancerInboundNatRules": [

@@ -186,7 +186,7 @@
     },
     "artifactsBaseUrl": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/fortinetclouddev/FortiGate-HA-for-Azure/EastWestHA",
+      "defaultValue": "https://raw.githubusercontent.com/fortinetclouddev/FortiGate-HA-for-Azure/EastWestHA1.1",
       "metadata": {
         "description": "Base URL of the solution template gallery package",
         "artifactsBaseUrl": ""
@@ -418,51 +418,12 @@
               "probe": {
                 "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/probes/lbprobe')]"
               },
-              "protocol": "Tcp",
-              "frontendPort": 80,
-              "backendPort": 80,
-              "enableFloatingIP": true,
+              "protocol": "all",
+              "frontendPort": 0,
+              "backendPort": 0,
               "idleTimeoutInMinutes": 15
             },
-            "name": "lbruleFE1tcp80"
-          },
-          {
-            "properties": {
-              "frontendIPConfiguration": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/frontendIpConfigurations/', variables('internalLBFE1Name'))]"
-              },
-              "backendAddressPool": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/backendAddressPools/', variables('internalLBBE1Name'))]"
-              },
-              "probe": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/probes/lbprobe')]"
-              },
-              "protocol": "Tcp",
-              "frontendPort": 443,
-              "backendPort": 443,
-              "enableFloatingIP": true,
-              "idleTimeoutInMinutes": 15
-            },
-            "name": "lbruleFE1tcp443"
-          },
-          {
-            "properties": {
-              "frontendIPConfiguration": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/frontendIpConfigurations/', variables('internalLBFE1Name'))]"
-              },
-              "backendAddressPool": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/backendAddressPools/', variables('internalLBBE1Name'))]"
-              },
-              "probe": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/probes/lbprobe')]"
-              },
-              "protocol": "Tcp",
-              "frontendPort": 22,
-              "backendPort": 22,
-              "enableFloatingIP": true,
-              "idleTimeoutInMinutes": 15
-            },
-            "name": "lbruleFE1tcp22"
+            "name": "lbruleFE1all"
           },
           {
             "properties": {
@@ -475,51 +436,12 @@
               "probe": {
                 "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/probes/lbprobe')]"
               },
-              "protocol": "Tcp",
-              "frontendPort": 80,
-              "backendPort": 80,
-              "enableFloatingIP": true,
+              "protocol": "all",
+              "frontendPort": 0,
+              "backendPort": 0,
               "idleTimeoutInMinutes": 15
             },
-            "name": "lbruleFE2tcp80"
-          },
-          {
-            "properties": {
-              "frontendIPConfiguration": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/frontendIpConfigurations/', variables('internalLBFE2Name'))]"
-              },
-              "backendAddressPool": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/backendAddressPools/', variables('internalLBBE2Name'))]"
-              },
-              "probe": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/probes/lbprobe')]"
-              },
-              "protocol": "Tcp",
-              "frontendPort": 443,
-              "backendPort": 443,
-              "enableFloatingIP": true,
-              "idleTimeoutInMinutes": 15
-            },
-            "name": "lbruleFE2tcp443"
-          },
-          {
-            "properties": {
-              "frontendIPConfiguration": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/frontendIpConfigurations/', variables('internalLBFE2Name'))]"
-              },
-              "backendAddressPool": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/backendAddressPools/', variables('internalLBBE2Name'))]"
-              },
-              "probe": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('internalLBName')), '/probes/lbprobe')]"
-              },
-              "protocol": "Tcp",
-              "frontendPort": 22,
-              "backendPort": 22,
-              "enableFloatingIP": true,
-              "idleTimeoutInMinutes": 15
-            },
-            "name": "lbruleFE2tcp22"
+            "name": "lbruleFE2all"
           }
         ],
         "probes": [
