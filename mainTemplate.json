@@ -98,7 +98,7 @@
     },
     "publicIPAddressType": {
       "type": "string",
-      "defaultValue": "Dynamic",
+      "defaultValue": "Static",
       "allowedValues": [
         "Dynamic",
         "Static"
@@ -140,7 +140,7 @@
     },
     "Subnet1Name": {
       "type": "string",
-      "defaultValue": "Entry Subnet",
+      "defaultValue": "EntrySubnet",
       "metadata": {
         "description": "Subnet 1 Name"
       }
@@ -154,7 +154,7 @@
     },
     "Subnet2Name": {
       "type": "string",
-      "defaultValue": "Transit Subnet",
+      "defaultValue": "TransitSubnet",
       "metadata": {
         "description": "Subnet 2 Name"
       }
@@ -175,7 +175,7 @@
     },
     "Subnet3Name": {
       "type": "string",
-      "defaultValue": "Protected Subnet",
+      "defaultValue": "ProtectedSubnet",
       "metadata": {
         "description": "Subnet 3 Name"
       }
@@ -195,7 +195,7 @@
     },
     "artifactsBaseUrl": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/fortinetclouddev/FortiGate-HA-for-Azure/EastWestHA1.1",
+      "defaultValue": "https://raw.githubusercontent.com/fortinetclouddev/FortiGate-HA-for-Azure/EastWestHA2.0",
       "metadata": {
         "description": "Base URL of the solution template gallery package",
         "artifactsBaseUrl": ""
