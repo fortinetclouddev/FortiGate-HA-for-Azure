@@ -176,7 +176,7 @@
               "protocol": "tcp",
               "frontendPort": 22,
               "backendPort": 22,
-              "enableFloatingIP": true
+              "enableFloatingIP": false
             }
           },
           {
@@ -188,7 +188,7 @@
               "protocol": "tcp",
               "frontendPort": 443,
               "backendPort": 443,
-              "enableFloatingIP": true
+              "enableFloatingIP": false
             }
           },
           {
@@ -200,7 +200,7 @@
               "protocol": "tcp",
               "frontendPort": 22,
               "backendPort": 22,
-              "enableFloatingIP": true
+              "enableFloatingIP": false
             }
           },
           {
@@ -212,7 +212,7 @@
               "protocol": "tcp",
               "frontendPort": 443,
               "backendPort": 443,
-              "enableFloatingIP": true
+              "enableFloatingIP": false
             }
           }
         ],

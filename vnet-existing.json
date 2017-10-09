@@ -102,23 +102,5 @@
     "routeTable4Id": "[resourceId('Microsoft.Network/routeTables',parameters('routeTable4Name'))]"
   },
   "resources": [
-  ],
-  "outputs": {
-    "subnet1ID": {
-      "value": "[variables('subnet1ID')]",
-      "type": "string"
-    },
-    "subnet2ID": {
-      "value": "[variables('subnet2ID')]",
-      "type": "string"
-    },
-    "subnet3ID": {
-      "value": "[variables('subnet3ID')]",
-      "type": "string"
-    },
-    "subnet4ID": {
-      "value": "[variables('subnet4ID')]",
-      "type": "string"
-    }
-  }
+  ]
 }
