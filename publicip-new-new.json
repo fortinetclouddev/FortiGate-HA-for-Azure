@@ -68,6 +68,12 @@
         "description": "FortiGate A NIC0 interface name"
       }
     },
+    "internalLB_BE1Id": {
+      "type": "string",
+      "metadata": {
+        "description": "internal load balancer backend1 id"
+      }
+    },
     "network_NIC_fg21_Name": {
         "type": "string",
         "metadata": {
@@ -246,6 +252,9 @@
               "loadBalancerBackendAddressPools": [
                 {
                   "id": "[variables('network_LB_Public_BEId')]"
+                },
+                {
+                  "id": "[parameters('internalLB_BE1Id')]"
                 }
               ],
               "loadBalancerInboundNatRules": [
@@ -285,6 +294,9 @@
               "loadBalancerBackendAddressPools": [
                 {
                   "id": "[variables('network_LB_Public_BEId')]"
+                },
+                {
+                  "id": "[parameters('internalLB_BE1Id')]"
                 }
               ],
               "loadBalancerInboundNatRules": [

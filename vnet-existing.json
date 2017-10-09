@@ -62,7 +62,28 @@
         "description": "Virtual Network subnet Address Prefix (i.e. CIDR)"
       }
     },
+    "subnet4Name": {
+      "type": "string",
+      "metadata": {
+        "description": "Server will be deployed into this subnet within the Virtual Network"
+      }
+    },
+    "subnet4AddressPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "Virtual Network subnet Address Prefix (i.e. CIDR)"
+      }
+    },
+    "routeTable1Name": {
+      "type": "string"
+    },
     "routeTable2Name": {
+      "type": "string"
+    },
+    "routeTable3Name": {
+      "type": "string"
+    },
+    "routeTable4Name": {
       "type": "string"
     },
     "FortinetTags": {
@@ -74,7 +95,11 @@
     "subnet1ID": "[concat(variables('vnetID'),'/subnets/',parameters('subnet1Name'))]",
     "subnet2ID": "[concat(variables('vnetID'),'/subnets/',parameters('subnet2Name'))]",
     "subnet3ID": "[concat(variables('vnetID'),'/subnets/',parameters('subnet3Name'))]",
-    "routeTable2Id": "[resourceId('Microsoft.Network/routeTables',parameters('routeTable2Name'))]"
+    "subnet4ID": "[concat(variables('vnetID'),'/subnets/',parameters('subnet4Name'))]",
+    "routeTable1Id": "[resourceId('Microsoft.Network/routeTables',parameters('routeTable1Name'))]",
+    "routeTable2Id": "[resourceId('Microsoft.Network/routeTables',parameters('routeTable2Name'))]",
+    "routeTable3Id": "[resourceId('Microsoft.Network/routeTables',parameters('routeTable3Name'))]",
+    "routeTable4Id": "[resourceId('Microsoft.Network/routeTables',parameters('routeTable4Name'))]"
   },
   "resources": [
   ],
@@ -85,6 +110,14 @@
     },
     "subnet2ID": {
       "value": "[variables('subnet2ID')]",
+      "type": "string"
+    },
+    "subnet3ID": {
+      "value": "[variables('subnet3ID')]",
+      "type": "string"
+    },
+    "subnet4ID": {
+      "value": "[variables('subnet4ID')]",
       "type": "string"
     }
   }
