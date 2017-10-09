@@ -664,7 +664,7 @@
               "enableFloatingIP": true,
               "idleTimeoutInMinutes": 15
             },
-            "name": "lbruleFE2all"
+            "name": "lbruleFE1all"
           },
           {
             "properties": {
