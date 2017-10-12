@@ -590,11 +590,14 @@
     {
       "type": "Microsoft.Network/loadBalancers",
       "name": "[variables('internalLBName')]",
-      "apiVersion": "[variables('apiVer')]",
+      "apiVersion": "2017-08-01",
       "tags": {
        "provider": "[toUpper(parameters('FortinetTags').provider)]"
       },
       "location": "[parameters('location')]",
+      "sku": {
+        "name": "Standard"
+      },
       "dependsOn": [
         "[concat('Microsoft.Network/routeTables/', variables('routeTable1Name'))]",
         "[concat('Microsoft.Network/routeTables/', variables('routeTable2Name'))]",
