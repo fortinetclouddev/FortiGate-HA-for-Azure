@@ -111,13 +111,12 @@
     },
     "publicIPAddressType": {
       "type": "string",
-      "defaultValue": "Dynamic",
+      "defaultValue": "Static",
       "allowedValues": [
-        "Dynamic",
         "Static"
       ],
       "metadata": {
-        "description": "Type of public IP address"
+        "description": "Type of public IP address - for preview 'Standard' load balancer, static IPs are required."
       }
     },
     "vnetNewOrExisting": {
