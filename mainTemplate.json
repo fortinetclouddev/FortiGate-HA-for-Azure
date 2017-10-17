@@ -28,7 +28,7 @@
     },
     "FortiGateImageSKU": {
       "type": "string",
-      "defaultValue": "fortinet_fg-vm_payg",
+      "defaultValue": "fortinet_fg-vm",
       "allowedValues": [
         "fortinet_fg-vm",
         "fortinet_fg-vm_payg"
@@ -37,9 +37,22 @@
         "description": "Identifies whether to to use PAYG (on demand licensing) or BYOL license model (where license is purchased separately)"
       }
     },
+    "FortiGateVersion": {
+      "type": "string",
+      "defaultValue": "latest",
+      "allowedValues": [
+        "5.2.9",
+        "5.4.3",
+        "5.6.2",
+        "latest"
+      ],
+      "metadata": {
+        "description": "5.6.2 is latest version for BYOL and PAYG; 5.2.9 is previous BYOL; 5.4.3 is previous PAYG."
+      }
+    },
     "instanceType": {
       "type": "string",
-      "defaultValue": "Standard_D3_v2",
+      "defaultValue": "Standard_F1",
       "metadata": {
         "description": "Virtual Machine size selection"
       }
@@ -349,7 +362,10 @@
       "tags": {
        "provider": "[toUpper(parameters('FortinetTags').provider)]"
       },
-      "location": "[parameters('location')]",
+      "location": "2017-08-01",
+      "sku": {
+        "name": "Standard"
+      },
       "dependsOn": [
         "[concat('Microsoft.Network/routeTables/', variables('routeTable2Name'))]",
         "[concat('Microsoft.Resources/deployments/', 'SettingUpVirtualNetwork')]"
@@ -561,7 +577,7 @@
             "publisher": "fortinet",
             "offer": "fortinet_fortigate-vm_v5",
             "sku": "[parameters('FortiGateImageSKU')]",
-            "version": "latest"
+            "version": "[parameters('FortiGateVersion')]"
           },
           "osDisk": {
             "createOption": "FromImage"
@@ -626,7 +642,7 @@
             "publisher": "fortinet",
             "offer": "fortinet_fortigate-vm_v5",
             "sku": "[parameters('FortiGateImageSKU')]",
-            "version": "latest"
+            "version": "[parameters('FortiGateVersion')]"
           },
           "osDisk": {
             "createOption": "FromImage"
