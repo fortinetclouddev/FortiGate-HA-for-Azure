@@ -358,11 +358,11 @@
     {
       "type": "Microsoft.Network/loadBalancers",
       "name": "[variables('internalLBName')]",
-      "apiVersion": "[variables('apiVer')]",
+      "apiVersion": "2017-08-01",
       "tags": {
        "provider": "[toUpper(parameters('FortinetTags').provider)]"
       },
-      "location": "2017-08-01",
+      "location": "[parameters('location')]",
       "sku": {
         "name": "Standard"
       },
