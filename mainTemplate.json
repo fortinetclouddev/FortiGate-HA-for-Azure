@@ -234,7 +234,6 @@
     "internalLBid": "[resourceID('Microsoft.Network/loadBalancers',variables('internalLBName'))]",
     "internalLB_BE2Id": "[concat(variables('internalLBid'),'/backendAddressPools/',variables('internalLBBE2Name'))]",
 
-    "apiVer": "2015-06-15",
     "compute_VM_fg1_Name": "[variables('vmName')]",
     "compute_VM_fg2_Name": "[variables('vm2Name')]",
 
@@ -837,45 +836,6 @@
       "name": "UpdateNIC2",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "[variables('network_NIC_fg12_Name')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('updateIPURI')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "nicName": {
-            "value": "[variables('network_NIC_fg12_Name')]"
-          },
-          "SubnetRef": {
-            "value": "[variables('subnet2Ref')]"
-          },
-          "privateIp": {
-            "value": "[reference(concat('Microsoft.Network/networkInterfaces/', variables('network_NIC_fg12_Name'))).ipConfigurations[0].properties.privateIPAddress]"
-          },
-          "BEPool": {
-            "value": "[variables('internalLB_BE2Id')]"
-          },
-          "NATRules": {
-            "value": null
-          },
-          "FortinetTags": {
-            "value": "[parameters('FortinetTags')]"
-          },
-          "NSGName": {
-            "value": "[variables('NSGName')]"
-          }
-        }
-      }
-    },
-
-    {
-      "type": "Microsoft.Resources/deployments",
-      "name": "UpdateNIC3",
-      "apiVersion": "2015-01-01",
-      "dependsOn": [
         "[variables('network_NIC_fg21_Name')]"
       ],
       "properties": {
@@ -886,13 +846,13 @@
         },
         "parameters": {
           "nicName": {
-            "value": "[variables('network_NIC_fg11_Name')]"
+            "value": "[variables('network_NIC_fg21_Name')]"
           },
           "SubnetRef": {
             "value": "[variables('subnet1Ref')]"
           },
           "privateIp": {
-            "value": "[reference(concat('Microsoft.Network/networkInterfaces/', variables('network_NIC_fg11_Name'))).ipConfigurations[0].properties.privateIPAddress]"
+            "value": "[reference(concat('Microsoft.Network/networkInterfaces/', variables('network_NIC_fg21_Name'))).ipConfigurations[0].properties.privateIPAddress]"
           },
           "BEPool": {
             "value": "[variables('network_LB_Public_BEId')]"
@@ -906,44 +866,6 @@
                 "id": "[variables('network_LB_Public_NatRule_FGAdminPerm_fg2_Id')]"
               }
             ]
-          },
-          "FortinetTags": {
-            "value": "[parameters('FortinetTags')]"
-          },
-          "NSGName": {
-            "value": "[variables('NSGName')]"
-          }
-        }
-      }
-    },
-    {
-      "type": "Microsoft.Resources/deployments",
-      "name": "UpdateNIC4",
-      "apiVersion": "2015-01-01",
-      "dependsOn": [
-        "[variables('network_NIC_fg22_Name')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('updateIPURI')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "nicName": {
-            "value": "[variables('network_NIC_fg22_Name')]"
-          },
-          "SubnetRef": {
-            "value": "[variables('subnet2Ref')]"
-          },
-          "privateIp": {
-            "value": "[reference(concat('Microsoft.Network/networkInterfaces/', variables('network_NIC_fg22_Name'))).ipConfigurations[0].properties.privateIPAddress]"
-          },
-          "BEPool": {
-            "value": "[variables('internalLB_BE2Id')]"
-          },
-          "NATRules": {
-            "value": null
           },
           "FortinetTags": {
             "value": "[parameters('FortinetTags')]"
@@ -969,7 +891,7 @@
       },
       "dependsOn": [
         "UpdateNIC1",
-        "UpdateNIC2"
+        "[variables('network_NIC_fg12_Name')]"
       ],
       "properties": {
         "hardwareProfile": {
@@ -1033,8 +955,8 @@
         "product": "fortinet_fortigate-vm_v5"
       },
       "dependsOn": [
-        "UpdateNIC3",
-        "UpdateNIC4"
+        "UpdateNIC2",
+        "[variables('network_NIC_fg22_Name')]"
       ],
       "properties": {
         "hardwareProfile": {
