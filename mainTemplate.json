@@ -359,7 +359,7 @@
       },
       "dependsOn": [
         "[concat('Microsoft.Network/routeTables/', variables('routeTable2Name'))]",
-        "[concat('Microsoft.Resources/deployments/', 'SettingUpVirtualNetwork')]"
+        "[parameters('vnetName')]"
       ],
       "properties": {
         "frontendIPConfigurations": [
