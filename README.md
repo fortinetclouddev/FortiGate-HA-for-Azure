@@ -1,4 +1,4 @@
-This template set:
+## This template set:
 	- creates a vnet with three subnets
                 or uses an existing vnet of your selection.  If using an existing vnet, it must already have 3 subnets.
 	- creates or uses two public IPs connected as frontends to an Azure public load balancer.
@@ -20,11 +20,12 @@ A best practice full deployment will look like the following diagram:
 
 ---
 
-In order to configure FortiGates:
-  FortiGate-A:
+### In order to configure FortiGates:
+
+    FortiGate-A:
     Connect via https to public IP1 or private IP if already connected to the vnet via ExpressRoute or Azure VPN (both of these IPs can be obtained from the portal)
     Connect via SSH on port 22 to public IP1 to directly access the CLI
-  FortiGate-B:
+    FortiGate-B:
     Connect via https to public IP2 or private IP if already connected to the vnet via ExpressRoute or Azure VPN (both of these IPs can be obtained from the portal)
     Connect via SSH on port 22 to public IP2 to directly access the CLI
 
@@ -34,20 +35,20 @@ When configuring the policies on the FortiGates to allow and forward traffic to 
 
 If you do prefer to use FGSP for session synchronization.  Here's the recommended configuration:
 
-config system ha
-    set session-pickup enable
-    set session-pickup-connectionless enable
-    set session-pickup-nat enable
-    set session-pickup-expectation enable
-    set override disable
-end
+    config system ha
+        set session-pickup enable
+        set session-pickup-connectionless enable
+        set session-pickup-nat enable
+        set session-pickup-expectation enable
+        set override disable
+    end
 
-config system cluster-sync
-    edit 0
-        set peerip 10.0.1.x
-        set syncvd "root"
-    next
-end
+    config system cluster-sync
+        edit 0
+            set peerip 10.0.1.x
+            set syncvd "root"
+        next
+    end
 
 *Where x in 10.0.1.x is the IP of port1 of the opposite FortiGate
 
