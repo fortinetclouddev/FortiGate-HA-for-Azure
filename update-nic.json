@@ -11,45 +11,20 @@
     "privateIp": {
       "type": "string"
     },
-    "publicIPID": {
+    "BEPool": {
       "type": "string"
     },
-    "publicIPNewOrExistingOrNone": {
-      "type": "string"
+    "NATRules": {
+        "type": "array"
     },
     "FortinetTags": {
       "type": "object"
+    },
+    "NSGName": {
+        "type": "string"
     }
   },
   "variables": {
-    "NICwPIP": [
-      {
-        "name": "ipconfig1",
-        "properties": {
-          "privateIPAllocationMethod": "Static",
-          "privateIPAddress": "[parameters('privateIp')]",
-          "subnet": {
-            "id": "[parameters('SubnetRef')]"
-          },
-          "publicIPAddress": {
-            "id": "[parameters('publicIPID')]"
-          }
-        }
-      }
-    ],
-
-    "NICwoPIP": [
-      {
-        "name": "ipconfig1",
-        "properties": {
-          "privateIPAllocationMethod": "Static",
-          "privateIPAddress": "[parameters('privateIp')]",
-          "subnet": {
-            "id": "[parameters('SubnetRef')]"
-          }
-        }
-      }
-    ]
   },
   "resources": [
     {
@@ -63,8 +38,28 @@
       "name": "[parameters('nicName')]",
       "location": "[resourceGroup().location]",
       "properties": {
-        "ipConfigurations": "[if(equals(parameters('publicIPNewOrExistingOrNone'), 'none'), variables('NICwoPIP'), variables('NICwPIP'))]",
-        "enableIPForwarding": false
+        "ipConfigurations": [
+            {
+              "name": "ipconfig1",
+              "properties": {
+                "privateIPAllocationMethod": "Static",
+                "privateIPAddress": "[parameters('privateIp')]",
+                "subnet": {
+                  "id": "[parameters('SubnetRef')]"
+                },
+                "loadBalancerBackendAddressPools": [
+                  {
+                    "id": "[parameters('BEPool')]"
+                  }
+                ],
+                "loadBalancerInboundNatRules": "[parameters('NATRules')]"
+              }
+            }
+          ],
+          "enableIPForwarding": true,
+          "networkSecurityGroup": {
+            "id": "[resourceID('Microsoft.Network/networkSecurityGroups/',parameters('NSGName'))]"
+          }
       }
     }
   ],

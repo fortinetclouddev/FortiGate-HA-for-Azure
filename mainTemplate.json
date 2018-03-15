@@ -315,6 +315,9 @@
       "apiVersion": "2017-09-01",
       "name": "[parameters('vnetName')]",
       "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/routeTables/', variables('routeTable2Name'))]"
+      ],
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -358,7 +361,6 @@
         "name": "Standard"
       },
       "dependsOn": [
-        "[concat('Microsoft.Network/routeTables/', variables('routeTable2Name'))]",
         "[parameters('vnetName')]"
       ],
       "properties": {
@@ -640,7 +642,9 @@
       "name": "[variables('network_NIC_fg11_Name')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[variables('network_LB_Public_Id')]"
+        "[variables('network_LB_Public_Id')]",
+        "[parameters('vnetName')]",
+        "[variables('NSGName')]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -683,7 +687,9 @@
       "location": "[parameters('location')]",
       "dependsOn": [
         "[variables('network_LB_Public_Id')]",
-        "[variables('network_NIC_fg11_Name')]"
+        "[variables('network_NIC_fg11_Name')]",
+        "[parameters('vnetName')]",
+        "[variables('NSGName')]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -804,14 +810,24 @@
           "privateIp": {
             "value": "[reference(concat('Microsoft.Network/networkInterfaces/', variables('network_NIC_fg11_Name'))).ipConfigurations[0].properties.privateIPAddress]"
           },
-          "publicIPID": {
-            "value": "[variables('publicIPID')]"
+          "BEPool": {
+            "value": "[variables('network_LB_Public_BEId')]"
           },
-          "publicIPNewOrExistingOrNone": {
-            "value": "[parameters('publicIPNewOrExisting')]"
+          "NATRules": {
+            "value": [
+              {
+                "id": "[variables('network_LB_Public_NatRule_SSH_fg1_Id')]"
+              },
+              {
+                "id": "[variables('network_LB_Public_NatRule_FGAdminPerm_fg1_Id')]"
+              }
+            ]
           },
           "FortinetTags": {
             "value": "[parameters('FortinetTags')]"
+          },
+          "NSGName": {
+            "value": "[variables('NSGName')]"
           }
         }
       }
@@ -839,14 +855,17 @@
           "privateIp": {
             "value": "[reference(concat('Microsoft.Network/networkInterfaces/', variables('network_NIC_fg12_Name'))).ipConfigurations[0].properties.privateIPAddress]"
           },
-          "publicIPID": {
-            "value": "[variables('publicIPID')]"
+          "BEPool": {
+            "value": "[variables('internalLB_BE2Id')]"
           },
-          "publicIPNewOrExistingOrNone": {
-            "value": "none"
+          "NATRules": {
+            "value": null
           },
           "FortinetTags": {
             "value": "[parameters('FortinetTags')]"
+          },
+          "NSGName": {
+            "value": "[variables('NSGName')]"
           }
         }
       }
@@ -875,14 +894,24 @@
           "privateIp": {
             "value": "[reference(concat('Microsoft.Network/networkInterfaces/', variables('network_NIC_fg11_Name'))).ipConfigurations[0].properties.privateIPAddress]"
           },
-          "publicIPID": {
-            "value": "[variables('publicIPID')]"
+          "BEPool": {
+            "value": "[variables('network_LB_Public_BEId')]"
           },
-          "publicIPNewOrExistingOrNone": {
-            "value": "[parameters('publicIPNewOrExisting')]"
+          "NATRules": {
+            "value": [
+              {
+                "id": "[variables('network_LB_Public_NatRule_SSH_fg2_Id')]"
+              },
+              {
+                "id": "[variables('network_LB_Public_NatRule_FGAdminPerm_fg2_Id')]"
+              }
+            ]
           },
           "FortinetTags": {
             "value": "[parameters('FortinetTags')]"
+          },
+          "NSGName": {
+            "value": "[variables('NSGName')]"
           }
         }
       }
@@ -910,14 +939,17 @@
           "privateIp": {
             "value": "[reference(concat('Microsoft.Network/networkInterfaces/', variables('network_NIC_fg22_Name'))).ipConfigurations[0].properties.privateIPAddress]"
           },
-          "publicIPID": {
-            "value": "[variables('publicIPID')]"
+          "BEPool": {
+            "value": "[variables('internalLB_BE2Id')]"
           },
-          "publicIPNewOrExistingOrNone": {
-            "value": "none"
+          "NATRules": {
+            "value": null
           },
           "FortinetTags": {
             "value": "[parameters('FortinetTags')]"
+          },
+          "NSGName": {
+            "value": "[variables('NSGName')]"
           }
         }
       }
