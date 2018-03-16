@@ -14,9 +14,6 @@
     "BEPool": {
       "type": "string"
     },
-    "NATRules": {
-        "type": "array"
-    },
     "FortinetTags": {
       "type": "object"
     },
@@ -51,8 +48,7 @@
                   {
                     "id": "[parameters('BEPool')]"
                   }
-                ],
-                "loadBalancerInboundNatRules": "[parameters('NATRules')]"
+                ]
               }
             }
           ],
