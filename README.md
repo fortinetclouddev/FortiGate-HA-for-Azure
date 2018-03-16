@@ -1,5 +1,5 @@
 ## This template set:
-Creates a FortiGate virtual appliance in an existing subnet, tied to existing HA deployment including:
+    Creates a FortiGate virtual appliance in an existing subnet, tied to existing HA deployment including:
     - Existing VNET
     - Existing Availability Set
     - Existing Public Load Balancer
@@ -19,7 +19,7 @@ Post deployment diagram will be modified to:
 
 ---
 
-### In order to configure FortiGates:
+### Remaining Tasks:
 
 This template does not configure the new FortiGate, nor does it configure the Public Load balancer beyond appending to the backend.  If you wish to provide administrative access, you will need to add all necessary configurations, including NAT rules and another public IP (if desired).
 
