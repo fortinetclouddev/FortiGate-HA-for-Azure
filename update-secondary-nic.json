@@ -11,9 +11,6 @@
     "privateIp": {
       "type": "string"
     },
-    "BEPool": {
-      "type": "string"
-    },
     "FortinetTags": {
       "type": "object"
     },
@@ -43,12 +40,7 @@
                 "privateIPAddress": "[parameters('privateIp')]",
                 "subnet": {
                   "id": "[parameters('SubnetRef')]"
-                },
-                "loadBalancerBackendAddressPools": [
-                  {
-                    "id": "[parameters('BEPool')]"
-                  }
-                ]
+                }
               }
             }
           ],
