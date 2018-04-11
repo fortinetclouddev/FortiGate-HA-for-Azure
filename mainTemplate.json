@@ -185,8 +185,6 @@
     "network_NIC_fg22_Name": "[concat(variables('vm2Name'),'Nic1')]",
     "network_NIC_fg22_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg22_Name'))]",
 
-    "NSGName": "[concat(parameters('FortiGateNamePrefix'),'-',uniqueString(resourceGroup().id),'-NSG')]",
-
     "updateIPURI": "[concat(parameters('artifactsBaseURL'),'/update-nic.json')]",
     "updateSecIPURI": "[concat(parameters('artifactsBaseURL'),'/update-secondary-nic.json')]"
   },
@@ -339,53 +337,11 @@
       "tags": {
         "provider": "[toUpper(parameters('FortinetTags').provider)]"
       },
-      "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "[variables('NSGName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "securityRules": [
-          {
-            "name": "AllowAllInbound",
-            "properties": {
-              "description": "Allow all in",
-              "protocol": "*",
-              "sourcePortRange": "*",
-              "destinationPortRange": "*",
-              "sourceAddressPrefix": "*",
-              "destinationAddressPrefix": "*",
-              "access": "Allow",
-              "priority": 100,
-              "direction": "Inbound"
-            }
-          },
-          {
-            "name": "AllowAllOutbound",
-            "properties": {
-              "description": "Allow all out",
-              "protocol": "*",
-              "sourcePortRange": "*",
-              "destinationPortRange": "*",
-              "sourceAddressPrefix": "*",
-              "destinationAddressPrefix": "*",
-              "access": "Allow",
-              "priority": 105,
-              "direction": "Outbound"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "apiVersion": "2017-09-01",
-      "tags": {
-        "provider": "[toUpper(parameters('FortinetTags').provider)]"
-      },
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('network_NIC_fg11_Name')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[parameters('vnetName')]",
-        "[variables('NSGName')]",
         "[concat('Microsoft.Network/loadBalancers/', variables('internalLBName'))]"
       ],
       "properties": {
@@ -405,10 +361,7 @@
             }
           }
         ],
-        "enableIPForwarding": true,
-        "networkSecurityGroup": {
-          "id": "[resourceID('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]"
-        }
+        "enableIPForwarding": true
       }
     },
     {
@@ -422,8 +375,7 @@
       "dependsOn": [
         "[concat('Microsoft.Network/loadBalancers/', variables('internalLBName'))]",
         "[variables('network_NIC_fg11_Name')]",
-        "[parameters('vnetName')]",
-        "[variables('NSGName')]"
+        "[parameters('vnetName')]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -442,10 +394,7 @@
             }
           }
         ],
-        "enableIPForwarding": true,
-        "networkSecurityGroup": {
-          "id": "[resourceID('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]"
-        }
+        "enableIPForwarding": true
       }
     },
     {
@@ -529,9 +478,6 @@
           },
           "FortinetTags": {
             "value": "[parameters('FortinetTags')]"
-          },
-          "NSGName": {
-            "value": "[variables('NSGName')]"
           }
         }
       }
@@ -564,9 +510,6 @@
           },
           "FortinetTags": {
             "value": "[parameters('FortinetTags')]"
-          },
-          "NSGName": {
-            "value": "[variables('NSGName')]"
           }
         }
       }
@@ -596,9 +539,6 @@
           },
           "FortinetTags": {
             "value": "[parameters('FortinetTags')]"
-          },
-          "NSGName": {
-            "value": "[variables('NSGName')]"
           }
         }
       }
@@ -628,9 +568,6 @@
           },
           "FortinetTags": {
             "value": "[parameters('FortinetTags')]"
-          },
-          "NSGName": {
-            "value": "[variables('NSGName')]"
           }
         }
       }
