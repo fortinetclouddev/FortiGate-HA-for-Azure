@@ -13,9 +13,6 @@
     },
     "FortinetTags": {
       "type": "object"
-    },
-    "NSGName": {
-        "type": "string"
     }
   },
   "variables": {
@@ -44,10 +41,7 @@
               }
             }
           ],
-          "enableIPForwarding": true,
-          "networkSecurityGroup": {
-            "id": "[resourceID('Microsoft.Network/networkSecurityGroups/',parameters('NSGName'))]"
-          }
+          "enableIPForwarding": true
       }
     }
   ],
