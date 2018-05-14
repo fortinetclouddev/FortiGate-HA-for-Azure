@@ -42,8 +42,9 @@
       "defaultValue": "latest",
       "allowedValues": [
         "5.2.9",
-        "5.4.8",
-        "5.6.3",
+        "5.4.6",
+        "5.6.4",
+        "6.0.0",
         "latest"
       ],
       "metadata": {
@@ -567,6 +568,25 @@
               "idleTimeoutInMinutes": 15
             },
             "name": "PublicLBRule-FE2-http"
+          },
+          {
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('network_LB_Public_Name')), '/frontendIpConfigurations/', variables('network_LB_Public_FEName'))]"
+              },
+              "backendAddressPool": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('network_LB_Public_Name')), '/backendAddressPools/', variables('network_LB_Public_BEName'))]"
+              },
+              "probe": {
+                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('network_LB_Public_Name')), '/probes/lbprobe')]"
+              },
+              "protocol": "Udp",
+              "frontendPort": 10551,
+              "backendPort": 10551,
+              "enableFloatingIP": false,
+              "idleTimeoutInMinutes": 15
+            },
+            "name": "PublicLBRule-FE1-udp10551"
           }
         ],
         "inboundNatRules": [
