@@ -1,6 +1,7 @@
 {
-    "handler": "Microsoft.Compute.MultiVm",
-    "version": "0.0.1-preview",
+  "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+  "handler": "Microsoft.Compute.MultiVm",
+  "version": "0.1.2-preview",
     "parameters": {
       "basics": [
         {
@@ -15,43 +16,44 @@
           }
         },
         {
-            "name": "haTypeSelectorElement",
+            "name": "skuSelectorElement",
             "type": "Microsoft.Common.OptionsGroup",
-            "label": "Select HA Type",
-            "toolTip": "Select PAYG for on-demand/hourly billing of the FortiGate license, or BYOL to purchase a license from Fortinet separately.",
-            "defaultValue": "PAYG",
+            "label": "PAYG/BYOL License",
+            "toolTip": "Select PAYG for on-demand/hourly billing of the FortiGate license, or BYOL to obtain a license from Fortinet separately.",
+            "defaultValue": "PAYG 6.0.3",
             "constraints": {
               "allowedValues": [
                 {
-                  "label": "Active/Active using Azure Standard Load Balancers",
-                  "value": "AA"
+                  "label": "PAYG 5.6.6",
+                  "value": {
+                    "SKU": "fortinet_fg-vm_payg",
+                    "Version": "5.6.6"
+                  }
                 },
                 {
-                  "label": "Active/Passive using Fortinet Fabric Connector",
-                  "value": "AP"
+                  "label": "BYOL 5.6.6",
+                  "value": {
+                    "SKU": "fortinet_fg-vm",
+                    "Version": "5.6.6"
+                  }
+                },
+                {
+                  "label": "PAYG 6.0.3",
+                  "value": {
+                    "SKU": "fortinet_fg-vm_payg",
+                    "Version": "6.0.3"
+                  }
+                },
+                {
+                  "label": "BYOL 6.0.3",
+                  "value": {
+                    "SKU": "fortinet_fg-vm",
+                    "Version": "6.0.3"
+                  }
                 }
               ]
             }
           },
-        {
-          "name": "skuSelectorElement",
-          "type": "Microsoft.Common.OptionsGroup",
-          "label": "PAYG/BYOL License",
-          "toolTip": "Select PAYG for on-demand/hourly billing of the FortiGate license, or BYOL to purchase a license from Fortinet separately.",
-          "defaultValue": "PAYG",
-          "constraints": {
-            "allowedValues": [
-              {
-                "label": "PAYG",
-                "value": "fortinet_fg-vm_payg"
-              },
-              {
-                "label": "BYOL",
-                "value": "fortinet_fg-vm"
-              }
-            ]
-          }
-        },
         {
           "name": "adminUsername",
           "type": "Microsoft.Compute.UserNameTextBox",
@@ -213,7 +215,7 @@
                 }
               },
               "options": {
-                "hideNone": false,
+                "hideNone": true,
                 "hideDomainNameLabel": true
               }
             },
@@ -236,33 +238,10 @@
                 }
               },
               "options": {
-                "hideNone": false,
+                "hideNone": true,
                 "hideDomainNameLabel": true
               }
             },
-            {
-                "name": "publicIpAddress3",
-                "type": "Microsoft.Network.PublicIpAddressCombo",
-                "label": {
-                  "publicIpAddress": "Initial Public IP for published services",
-                  "domainNameLabel": ""
-                },
-                "toolTip": {
-                  "publicIpAddress": "Name of the public IP address object"
-                },
-                "defaultValue": {
-                  "publicIpAddressName": "FortiGate-PublicIP-Shared"
-                },
-                "constraints": {
-                  "required": {
-                    "domainNameLabel": false
-                  }
-                },
-                "options": {
-                  "hideNone": false,
-                  "hideDomainNameLabel": true
-                }
-              },
             {
               "name": "publicIPAddressTypeElement",
               "type": "Microsoft.Common.OptionsGroup",
@@ -289,17 +268,16 @@
         "FortiGateNamePrefix": "[basics('VMName')]",
         "adminUsername": "[basics('adminUsername')]",
         "adminPassword": "[basics('passwordElement')]",
-        "FortiGateImageSKU": "[basics('skuSelectorElement')]",
+        "FortiGateImageSKU": "[basics('skuSelectorElement').SKU]",
+        "FortiGateImageVersion": "[basics('skuSelectorElement').Version]",
         "instanceType": "[steps('NetworkandInstanceConfig').vmSize]",
         "publicIPAddressName": "[steps('IPConfig').publicIpAddress.name]",
         "publicIPAddress2Name": "[steps('IPConfig').publicIpAddress2.name]",
         "publicIPAddressType": "[steps('IPConfig').publicIPAddressTypeElement]",
-        "publicIPNewOrExistingOrNone": "[steps('IPConfig').publicIpAddress.newOrExistingOrNone]",
-        "publicIP2NewOrExistingOrNone": "[steps('IPConfig').publicIpAddress2.newOrExistingOrNone]",
+        "publicIPNewOrExisting": "[steps('IPConfig').publicIpAddress.newOrExistingOrNone]",
+        "publicIP2NewOrExisting": "[steps('IPConfig').publicIpAddress2.newOrExistingOrNone]",
         "publicIPAddressResourceGroup": "[steps('IPConfig').publicIpAddress.resourceGroup]",
         "publicIPAddress2ResourceGroup": "[steps('IPConfig').publicIpAddress2.resourceGroup]",
-        "fortiGateIP1": "[steps('NetworkandInstanceConfig').virtualNetwork.subnets.subnet1.startAddress]",
-        "fortiGateIP2": "[steps('NetworkandInstanceConfig').virtualNetwork.subnets.subnet2.startAddress]",
         "location": "[location()]",
         "vnetNewOrExisting": "[steps('NetworkandInstanceConfig').virtualNetwork.newOrExisting]",
         "vnetName": "[steps('NetworkandInstanceConfig').virtualNetwork.name]",
@@ -308,7 +286,9 @@
         "Subnet1Name": "[steps('NetworkandInstanceConfig').virtualNetwork.subnets.subnet1.name]",
         "Subnet1Prefix": "[steps('NetworkandInstanceConfig').virtualNetwork.subnets.subnet1.addressPrefix]",
         "Subnet2Name": "[steps('NetworkandInstanceConfig').virtualNetwork.subnets.subnet2.name]",
-        "Subnet2Prefix": "[steps('NetworkandInstanceConfig').virtualNetwork.subnets.subnet2.addressPrefix]"
+        "Subnet2Prefix": "[steps('NetworkandInstanceConfig').virtualNetwork.subnets.subnet2.addressPrefix]",
+        "Subnet3Name": "[steps('NetworkandInstanceConfig').virtualNetwork.subnets.subnet3.name]",
+        "Subnet3Prefix": "[steps('NetworkandInstanceConfig').virtualNetwork.subnets.subnet3.addressPrefix]"
       }
     }
     }
