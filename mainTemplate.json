@@ -226,7 +226,7 @@
     },
     "artifactsBaseUrl": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/fortinetsolutions/Azure-Templates/master/FortiGate/Azure Active-Active LoadBalancer HA-Ports",
+      "defaultValue": "https://raw.githubusercontent.com/fortinetclouddev/FortiGate-HA-for-Azure/AAwLBsv6.0.4/",
       "metadata": {
         "description": "Base URL of the solution template gallery package"
       }
@@ -327,7 +327,7 @@
     {
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[variables('compute_AvailabilitySet_FG_Name')]",
-      "apiVersion": "2018-02-01",
+      "apiVersion": "2017-03-30",
       "tags": {
        "provider": "[toUpper(parameters('FortinetTags').provider)]"
       },
