@@ -17,7 +17,7 @@
         },
         {
             "name": "skuSelectorElement",
-            "type": "Microsoft.Common.OptionsGroup",
+            "type": "Microsoft.Common.DropDown",
             "label": "PAYG/BYOL License",
             "toolTip": "Select PAYG for on-demand/hourly billing of the FortiGate license, or BYOL to obtain a license from Fortinet separately.",
             "defaultValue": "PAYG 6.0.3",
@@ -38,17 +38,17 @@
                   }
                 },
                 {
-                  "label": "PAYG 6.0.3",
+                  "label": "PAYG 6.0.4",
                   "value": {
                     "SKU": "fortinet_fg-vm_payg",
-                    "Version": "6.0.3"
+                    "Version": "6.0.4"
                   }
                 },
                 {
-                  "label": "BYOL 6.0.3",
+                  "label": "BYOL 6.0.4",
                   "value": {
                     "SKU": "fortinet_fg-vm",
-                    "Version": "6.0.3"
+                    "Version": "6.0.4"
                   }
                 }
               ]
@@ -71,7 +71,7 @@
             "password": "FortiGate password",
             "confirmPassword": "Confirm password"
           },
-          "toolTip": "Admin account password for the FortiGate virtual appliance",
+          "toolTip": "Admin accounts password for the FortiGate virtual appliance",
           "constraints": {
             "required": true,
             "regex": "^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\\d\\W])|(?=.*\\W)(?=.*\\d))|(?=.*\\W)(?=.*[A-Z])(?=.*\\d)).{12,123}$",
@@ -241,25 +241,6 @@
                 "hideNone": true,
                 "hideDomainNameLabel": true
               }
-            },
-            {
-              "name": "publicIPAddressTypeElement",
-              "type": "Microsoft.Common.OptionsGroup",
-              "label": "Public IP address type",
-              "toolTip": "",
-              "defaultValue": "Static",
-              "constraints": {
-                "allowedValues": [
-                  {
-                    "label": "Static",
-                    "value": "Static"
-                  },
-                  {
-                    "label": "Dynamic",
-                    "value": "Dynamic"
-                  }
-                ]
-              }
             }
           ]
         }
@@ -278,11 +259,15 @@
         "publicIP2NewOrExisting": "[steps('IPConfig').publicIpAddress2.newOrExistingOrNone]",
         "publicIPAddressResourceGroup": "[steps('IPConfig').publicIpAddress.resourceGroup]",
         "publicIPAddress2ResourceGroup": "[steps('IPConfig').publicIpAddress2.resourceGroup]",
+        "publicIP1AllocationMethod": "[steps('IPConfig').publicIpAddress.publicIPAllocationMethod]",
+        "publicIP1sku": "[steps('IPConfig').publicIpAddress.sku]",
+        "publicIP2AllocationMethod": "[steps('IPConfig').publicIpAddress2.publicIPAllocationMethod]",
+        "publicIP2sku": "[steps('IPConfig').publicIpAddress2.sku]",
         "location": "[location()]",
         "vnetNewOrExisting": "[steps('NetworkandInstanceConfig').virtualNetwork.newOrExisting]",
         "vnetName": "[steps('NetworkandInstanceConfig').virtualNetwork.name]",
         "vnetResourceGroup": "[steps('NetworkandInstanceConfig').virtualNetwork.resourceGroup]",
-        "vnetAddressPrefix": "[steps('NetworkandInstanceConfig').virtualNetwork.addressPrefix]",
+        "vnetAddressPrefixes": "[steps('NetworkandInstanceConfig').virtualNetwork.addressPrefixes]",
         "Subnet1Name": "[steps('NetworkandInstanceConfig').virtualNetwork.subnets.subnet1.name]",
         "Subnet1Prefix": "[steps('NetworkandInstanceConfig').virtualNetwork.subnets.subnet1.addressPrefix]",
         "Subnet2Name": "[steps('NetworkandInstanceConfig').virtualNetwork.subnets.subnet2.name]",
