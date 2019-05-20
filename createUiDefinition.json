@@ -191,7 +191,7 @@
           "name": "IPConfig",
           "label": "FortiGate IP address assignments",
           "subLabel": {
-            "preValidation": "Configure Public IP Addresses",
+            "preValidation": "Configure !Standard! Public IP Addresses",
             "postValidation": "Done"
           },
           "bladeTitle": "IP assignment",
@@ -200,18 +200,17 @@
               "name": "publicIpAddress",
               "type": "Microsoft.Network.PublicIpAddressCombo",
               "label": {
-                "publicIpAddress": "First public IP for management of FGT A",
+                "publicIpAddress": "First standard public IP for management of FGT A",
                 "domainNameLabel": ""
               },
               "toolTip": {
-                "publicIpAddress": "Name of the public IP address object"
+                "publicIpAddress": "Name of the public IP address object. Must be a Standard Public IP to work with this architecture."
               },
               "defaultValue": {
-                "publicIpAddressName": "FortiGate-PublicIP-A"
               },
               "constraints": {
                 "required": {
-                  "domainNameLabel": false
+                  "domainNameLabel": false                  
                 }
               },
               "options": {
@@ -223,14 +222,13 @@
               "name": "publicIpAddress2",
               "type": "Microsoft.Network.PublicIpAddressCombo",
               "label": {
-                "publicIpAddress": "Second public IP address for management of FGT B",
+                "publicIpAddress": "Second standard public IP address for management of FGT B",
                 "domainNameLabel": ""
               },
               "toolTip": {
-                "publicIpAddress": "Name of the public IP address object"
+                "publicIpAddress": "Name of the public IP address object. Must be a Standard Public IP to work with this architecture."
               },
               "defaultValue": {
-                "publicIpAddressName": "FortiGate-PublicIP-B"
               },
               "constraints": {
                 "required": {
