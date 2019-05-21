@@ -177,9 +177,9 @@
         },
         {
           "name": "IPConfig",
-          "label": "FortiGate IP address assignments *Use Standard Public IPs*",
+          "label": "FortiGate IP address assignments - Use Standard Public IPs",
           "subLabel": {
-            "preValidation": "Configure !Standard! Public IP Addresses",
+            "preValidation": "Configure Standard Public IP Addresses",
             "postValidation": "Done"
           },
           "bladeTitle": "IP assignment",
@@ -207,6 +207,15 @@
               }
             },
             {
+              "name": "BasicIPWarning1",
+              "type": "Microsoft.Common.InfoBox",
+              "options": {
+                "icon": "Error",
+                "text": "Must use Standard type public IPs to support Azure Standard Load Balancers"
+              },
+              "visible": "[not(equals(steps('IPConfig').publicIpAddress.sku, 'Standard'))]"
+            },
+            {
               "name": "publicIpAddress2",
               "type": "Microsoft.Network.PublicIpAddressCombo",
               "label": {
@@ -227,6 +236,15 @@
                 "hideNone": true,
                 "hideDomainNameLabel": true
               }
+            },
+            {
+              "name": "BasicIPWarning2",
+              "type": "Microsoft.Common.InfoBox",
+              "options": {
+                "icon": "Error",
+                "text": "Must use Standard type public IPs to support Azure Standard Load Balancers"
+              },
+              "visible": "[not(equals(steps('IPConfig').publicIpAddress2.sku, 'Standard'))]"
             }
           ]
         }
@@ -240,7 +258,6 @@
         "instanceType": "[steps('NetworkandInstanceConfig').vmSize]",
         "publicIPAddressName": "[steps('IPConfig').publicIpAddress.name]",
         "publicIPAddress2Name": "[steps('IPConfig').publicIpAddress2.name]",
-        "publicIPAddressType": "[steps('IPConfig').publicIPAddressTypeElement]",
         "publicIPNewOrExisting": "[steps('IPConfig').publicIpAddress.newOrExistingOrNone]",
         "publicIP2NewOrExisting": "[steps('IPConfig').publicIpAddress2.newOrExistingOrNone]",
         "publicIPAddressResourceGroup": "[steps('IPConfig').publicIpAddress.resourceGroup]",
