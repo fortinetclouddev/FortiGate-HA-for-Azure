@@ -189,7 +189,7 @@
         },
         {
           "name": "IPConfig",
-          "label": "FortiGate IP address assignments",
+          "label": "FortiGate IP address assignments *Use Standard Public IPs*",
           "subLabel": {
             "preValidation": "Configure !Standard! Public IP Addresses",
             "postValidation": "Done"
