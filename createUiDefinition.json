@@ -177,7 +177,7 @@
         },
         {
           "name": "IPConfig",
-          "label": "FortiGate IP address assignments",
+          "label": "FortiGate IP address assignments *Use Standard Public IPs*",
           "subLabel": {
             "preValidation": "Configure !Standard! Public IP Addresses",
             "postValidation": "Done"
@@ -195,7 +195,6 @@
                 "publicIpAddress": "Name of the public IP address object. Must be a Standard Public IP to work with this architecture."
               },
               "defaultValue": {
-                "publicIpAddressName": "FortiGate-PublicIP-A"
               },
               "constraints": {
                 "required": {
@@ -218,7 +217,6 @@
                 "publicIpAddress": "Name of the public IP address object. Must be a Standard Public IP to work with this architecture."
               },
               "defaultValue": {
-                "publicIpAddressName": "FortiGate-PublicIP-B"
               },
               "constraints": {
                 "required": {
