@@ -20,7 +20,7 @@
             "type": "Microsoft.Common.DropDown",
             "label": "PAYG/BYOL License",
             "toolTip": "Select PAYG for on-demand/hourly billing of the FortiGate license, or BYOL to obtain a license from Fortinet separately.",
-            "defaultValue": "PAYG 6.0.3",
+            "defaultValue": "PAYG 6.0.4",
             "constraints": {
               "allowedValues": [
                 {
@@ -49,6 +49,20 @@
                   "value": {
                     "SKU": "fortinet_fg-vm",
                     "Version": "6.0.4"
+                  }
+                },
+                {
+                  "label": "PAYG 6.2.0",
+                  "value": {
+                    "SKU": "fortinet_fg-vm_payg",
+                    "Version": "6.2.0"
+                  }
+                },
+                {
+                  "label": "BYOL 6.2.0",
+                  "value": {
+                    "SKU": "fortinet_fg-vm",
+                    "Version": "6.2.0"
                   }
                 }
               ]
@@ -210,22 +224,13 @@
               },
               "constraints": {
                 "required": {
-                  "domainNameLabel": false                  
+                  "domainNameLabel": false
                 }
               },
               "options": {
                 "hideNone": true,
                 "hideDomainNameLabel": true
               }
-            },
-            {
-              "name": "BasicIPWarning1",
-              "type": "Microsoft.Common.InfoBox",
-              "options": {
-                "icon": "Error",
-                "text": "Must use Standard type public IPs to support Azure Standard Load Balancers"
-              },
-              "visible": "[not(equals(steps('IPConfig').publicIpAddress.sku, 'Standard'))]"
             },
             {
               "name": "publicIpAddress2",
@@ -248,15 +253,53 @@
                 "hideNone": true,
                 "hideDomainNameLabel": true
               }
+            }
+          ]
+        },
+        {
+          "name": "IPConfigReview",
+          "label": "Public IP Standard SKU Verification",
+          "subLabel": {
+            "preValidation": "Public IP SKU Review",
+            "postValidation": "Done"
+          },
+          "bladeTitle": "Public IP SKU Review",
+          "elements": [
+            {
+              "name": "BasicIPWarning1",
+              "type": "Microsoft.Common.InfoBox",
+              "options": {
+                "icon": "Error",
+                "text": "Primary Public IP is configured using Basic SKU. Please return to previous blade and use Standard type public IPs to support Azure Standard Load Balancers"
+              },
+              "visible": "[not(equals(steps('IPConfig').publicIpAddress.sku, 'Standard'))]"
+            },
+            {
+              "name": "StandardIPConfirmation1",
+              "type": "Microsoft.Common.InfoBox",
+              "options": {
+                "icon": "Info",
+                "text": "Primary Public IP is Standard SKU. Proceed."
+              },
+              "visible": "[equals(steps('IPConfig').publicIpAddress.sku, 'Standard')]"
             },
             {
               "name": "BasicIPWarning2",
               "type": "Microsoft.Common.InfoBox",
               "options": {
                 "icon": "Error",
-                "text": "Must use Standard type public IPs to support Azure Standard Load Balancers"
+                "text": "Secondary Public IP is configured using Basic SKU. Please return to previous blade and use Standard type public IPs to support Azure Standard Load Balancers"
               },
               "visible": "[not(equals(steps('IPConfig').publicIpAddress2.sku, 'Standard'))]"
+            },
+            {
+              "name": "StandardIPConfirmation2",
+              "type": "Microsoft.Common.InfoBox",
+              "options": {
+                "icon": "Info",
+                "text": "Secondary Public IP is Standard SKU. Proceed."
+              },
+              "visible": "[equals(steps('IPConfig').publicIpAddress2.sku, 'Standard')]"
             }
           ]
         }
@@ -292,4 +335,3 @@
       }
     }
     }
-  
