@@ -173,9 +173,9 @@
               ],
               "constraints": {
                 "allowedSizes": [
-                  "Standard_F4",
-                  "Standard_F4s",
-                  "Standard_F4s_v2"
+                  "Standard_F2",
+                  "Standard_F2s",
+                  "Standard_F2s_v2"
                 ]
               },
               "osPlatform": "Linux",
